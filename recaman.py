@@ -10,4 +10,8 @@ for k in range(1, L):
     else:
         sequence.append(prev_value + k)
 
-print(" ".join(map(str, sequence)))
+for i in range(len(sequence)):
+    if i == len(sequence) - 1:
+        print(sequence[i])
+    else:
+        print(sequence[i], end=" ")
