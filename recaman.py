@@ -10,5 +10,4 @@ for k in range(1, L):
     else:
         sequence.append(prev_value + k)
 
-for item in sequence:
-    print(item, end=" ")
+print(" ".join(map(str, sequence)))
