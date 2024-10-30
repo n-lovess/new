@@ -2,7 +2,7 @@ def currency_converter(amount, from_currency, to_currency):
     if amount < 0:
         return 0.0
     
-    rate = conversion_rate['GBP']['PHP']
+    rate = conversion_rate[from_currency][to_currency]
     converted_amount = amount * rate
     return round(converted_amount, 2)
     
