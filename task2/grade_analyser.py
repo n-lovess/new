@@ -13,15 +13,25 @@ input_filename = sys.argv[1]
 output_filename = os.path.splitext(input_filename)[0] + "_out.csv"
 
 try:
-
+    
+    grades = []
     with open(input_filename, "r") as file:
-        grades = [float(line.strip()) for line in file if line.strip().isdigit()]
+        for line in file:
+           
+            try:
+                grade = float(line.strip())
+                grades.append(grade)
+            except ValueError:
+                continue 
 
-
+ 
     if not grades:
-        raise ValueError("No valid grades found in the file.")
+        with open(output_filename, "w") as file:
+            file.write("No valid grades found.\n")
+        print(f"Output written to {output_filename} with message: 'No valid grades found.'")
+        sys.exit(0)
 
-
+   
     average_grade = round(sum(grades) / len(grades), 2)
     highest_grade = max(grades)
     lowest_grade = min(grades)
@@ -35,14 +45,11 @@ try:
     print(f"Results written to {output_filename}")
 
 except FileNotFoundError:
+    
     print(f"Error: The file '{input_filename}' was not found.")
     sys.exit(1)
 
-except ValueError as ve:
-    print(f"Error: {ve}")
-    with open(output_filename, "w") as file:
-        file.write("No valid grades found.\n")
-
 except Exception as e:
+   
     print(f"An unexpected error occurred: {e}")
     sys.exit(1)
