@@ -1,17 +1,25 @@
 import sys
 import os
 
-def grades():
-    if len(sys.argv) < 2:
-        print("Error: No input filename provided.")
-        sys.exit(1)
 
-input_filename = "grades.csv"
-input_filename = sys.argv[0] 
-output_filename = os.path.splitext(input_filename)[0] + "grades_out.csv"
+if len(sys.argv) < 2:
+    print("Error: No input filename provided.")
+    print("Usage: python script_name.py <input_filename>")
+    sys.exit(1)
+
+
+input_filename = sys.argv[1]
+
+
+if not os.path.isfile(input_filename):
+    print(f"Error: The file '{input_filename}' does not exist.")
+    sys.exit(1)
+
+
+output_filename = os.path.splitext(input_filename)[0] + "_out.csv"
 
 try:
-    
+ 
     grades = []
     with open(input_filename, "r") as file:
         for line in file:
@@ -19,9 +27,9 @@ try:
                 grade = float(line.strip())
                 grades.append(grade)
             except ValueError:
-                pass  
+                pass 
 
-    
+
     if not grades:
         output_content = "No valid grades found.\n"
     else:
@@ -34,9 +42,11 @@ try:
             f"Lowest Grade: {lowest_grade}\n"
         )
 
-    
+
     with open(output_filename, "w") as file:
         file.write(output_content)
+
+    print(f"Processing complete. Results saved to '{output_filename}'.")
 
 except FileNotFoundError:
     print(f"Error: The file '{input_filename}' was not found.")
