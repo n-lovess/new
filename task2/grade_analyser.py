@@ -2,6 +2,9 @@ import sys
 import os
 
 
+print(f"sys.argv: {sys.argv}") 
+
+
 if len(sys.argv) < 2:
     print("Error: No input filename provided.")
     print("Usage: python script_name.py <input_filename>")
@@ -19,7 +22,7 @@ if not os.path.isfile(input_filename):
 output_filename = os.path.splitext(input_filename)[0] + "_out.csv"
 
 try:
- 
+
     grades = []
     with open(input_filename, "r") as file:
         for line in file:
@@ -28,6 +31,8 @@ try:
                 grades.append(grade)
             except ValueError:
                 pass 
+
+    print(f"Grades: {grades}")
 
 
     if not grades:
@@ -41,6 +46,9 @@ try:
             f"Highest Grade: {highest_grade}\n"
             f"Lowest Grade: {lowest_grade}\n"
         )
+
+
+    print(f"Output Content: {output_content}")
 
 
     with open(output_filename, "w") as file:
