@@ -2,7 +2,7 @@ import os
 
 input_filename = "grades.csv" 
 
-output_filename = os.path.splitext(input_filename)[0] + "_out.csv"
+output_filename = os.path.splitext(input_filename)[0] + "grades_out.csv"
 
 grades = [75, 88, 92, 67, 85]
 
