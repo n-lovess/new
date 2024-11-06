@@ -3,7 +3,7 @@ CHIP A5Q2201830364 {
     IN P, L, Z ;
     OUT D ;
 
-    PARTS :
+    PARTS : load A5Q2201830364.hdl 
     And ( a=P, b=L, out=a_and_l ) ;
     And ( a=P, b=Z, out=a_and_z ) ;
     Or ( a=a_and_l, b=a_and_z, out=or_out ) ;
