@@ -1,0 +1,11 @@
+CHIP A5Q2<201830364> {
+    IN P, L, Z;
+    OUT D;
+
+    PARTS:
+    AND(a=L, b=Z, out=a_and_z);
+    AND(a=L, b=P, out=a_and_l);
+    OR(a=P, b=a_and_z, out=or_out);
+    NOT(in=or_out, out=not_out);
+    AND(a=not_out, b=P, out=D);
+}
