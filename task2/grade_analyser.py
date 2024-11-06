@@ -1,6 +1,6 @@
 grades = [75, 88, 92, 67, 85]
 
-average_grade = sum(grades)
+average_grade = sum(grades) / len(grades)
 highest_grade = max(grades)
 lowest_grade = min(grades)
 
