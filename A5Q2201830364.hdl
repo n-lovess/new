@@ -3,9 +3,9 @@ CHIP A5Q2201830364 {
     OUT D;
 
     PARTS:
-    And(a=P, b=L, out=a_and_l);
-    And(a=P, b=Z, out=a_and_z);
-    Or(a=a_and_l, b=a_and_z, out=or_out);
-    Not(in=or_out, out=not_out);
-    And(a=not_out, b=L, out=D);
+    AND(a=P, b=L, out=a_and_l);
+    AND(a=P, b=Z, out=a_and_z);
+    OR(a=a_and_l, b=a_and_z, out=or_out);
+    NOT(in=or_out, out=not_out);
+    AND(a=not_out, b=L, out=D);
 }
