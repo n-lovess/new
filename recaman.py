@@ -13,4 +13,4 @@ for k in range(1, L):  # Loop starting from 1 up to the length
         sequence.append(prev_value + k)  # Otherwise, add k to prev_value
 
 # Print the sequence as a single line of space-separated integers
-print(" ".join(map(str, sequence)))
+print(sequence)
