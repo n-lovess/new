@@ -4,7 +4,6 @@ CHIP A5Q2201830364 {
 
     PARTS:
     Or(a=P, b=L, out=orPL);
-    Or(a=P, b=L, out=orPL);
     And(a=orPL, b=orPL, out=orPL);
     Not(in=Z, out=notZ);
     And(a=orPL, b=notZ, out=D);
