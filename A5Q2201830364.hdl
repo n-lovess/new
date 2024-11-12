@@ -1,9 +1,12 @@
-CHIP A5Q2201830364{
+CHIP A5Q2201830364 {
     IN P, L, Z;
     OUT D;
 
     PARTS:
-    Not(in=P, out=nP);
-    And(a=L, b=nP, out=D);
+    And(a=P, b=L, out=and1_out);    
+    And(a=L, b=Z, out=and2_out);  
+    Not(in=Z, out=not_out);         
+    And(a=and1_out, b=not_out, out=D);  
 }
+
 
