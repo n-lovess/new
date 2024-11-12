@@ -1,7 +1,26 @@
-CHIP A5Q2201830364 {
-    IN L;
+CHIP A5Q2<201830364> {
+    IN P, L, Z;
     OUT D;
-
     PARTS:
-    Not(in=L, out=D);
+    And ( a=P, b=L, out=a_and_l );
+    And ( a=P, b=Z, out=a_and_z );
+    Or ( a=a_and_l, b=a_and_z, out=or_out );
+    Not ( in=or_out, out=not_out );
+    And ( a=not_out, b=L, out=D );
+}
+
+CHIP TestA5Q2<201830364> {
+    IN P, L, Z;
+    OUT D;
+    
+    PARTS:
+    A5Q2<201830364>(P=P, L=L, Z=Z, D=D);
+}
+
+CHIP CompareA5Q2<201830364> {
+    IN P, L, Z;
+    OUT D;
+    
+    PARTS:
+    TestA5Q2<201830364>(P=P, L=L, Z=Z, D=D);
 }
