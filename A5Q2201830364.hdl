@@ -18,3 +18,4 @@ CHIP A5Q2201830364 {
 
     And(a=L, b=notOut, out=D);
 }
+
