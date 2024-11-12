@@ -3,10 +3,17 @@ CHIP A5Q2201830364 {
     OUT D;
 
     PARTS:
-    And(a=P, b=L, out=x);         
-    And(a=L, b=Z, out=y);         
-    Not(in=y, out=nz);            
-    And(a=x, b=nz, out=D);        
+    // First AND gate: P AND L
+    And(a=P, b=L, out=a1);
+
+    // Second AND gate: L AND Z
+    And(a=L, b=Z, out=a2);
+
+    // NOT gate: NOT of a2
+    Not(in=a2, out=n1);
+
+    // Final AND gate: a1 AND n1
+    And(a=a1, b=n1, out=D);
 }
 
 
