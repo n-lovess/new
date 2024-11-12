@@ -1,7 +1,7 @@
 CHIP A5Q2201830364 {
-    IN P;
+    IN L;
     OUT D;
 
     PARTS:
-    Not(in=P, out=D);
+    Not(in=L, out=D);
 }
