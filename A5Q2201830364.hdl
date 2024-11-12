@@ -3,19 +3,18 @@ CHIP A5Q2201830364 {
     OUT D;
 
     PARTS:
-    // First AND gate: P AND L
-    And(a=P, b=L, out=a1);
+    // First AND gate to calculate P AND L
+    And(a=P, b=L, out=andPL);
 
-    // Second AND gate: L AND Z
-    And(a=L, b=Z, out=a2);
+    // Second AND gate to calculate L AND Z
+    And(a=L, b=Z, out=andLZ);
 
-    // NOT gate: NOT of a2
-    Not(in=a2, out=n1);
+    // NOT gate to invert the output of L AND Z
+    Not(in=andLZ, out=notLZ);
 
-    // Final AND gate: a1 AND n1
-    And(a=a1, b=n1, out=D);
+    // Final AND gate to calculate (P AND L) AND (NOT (L AND Z))
+    And(a=andPL, b=notLZ, out=D);
 }
-
 
 
 
