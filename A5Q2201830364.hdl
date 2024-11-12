@@ -4,18 +4,24 @@ CHIP A5Q2201830364 {
     OUT D;
 
     PARTS:
-    
-    AND(a=P, b=L, out=a1);
 
-    
-    AND(a=P, b=Z, out=a2);
+    NAND(a=P, b=L, out=and1_nand1);
+    NAND(a=and1_nand1, b=and1_nand1, out=a1);
 
-    
-    OR(a=a1, b=a2, out=or_out);
 
-    
+    NAND(a=P, b=Z, out=and2_nand1);
+    NAND(a=and2_nand1, b=and2_nand1, out=a2);
+
+
+    NAND(a=a1, b=a1, out=or1_nand1);
+    NAND(a=a2, b=a2, out=or1_nand2);
+    NAND(a=or1_nand1, b=or1_nand2, out=or_out);
+
+
     NOT(in=or_out, out=not_out);
 
-    
-    AND(a=P, b=not_out, out=D);
+
+    NAND(a=P, b=not_out, out=and3_nand1);
+    NAND(a=and3_nand1, b=and3_nand1, out=D);
 }
+
