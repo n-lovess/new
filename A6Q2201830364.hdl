@@ -8,29 +8,29 @@ CHIP A6Q2201830364 {
     Not(in=c, out=nc);
     Not(in=d, out=nd);
 
-    And(a=na, b=nb, out=part1_1);
-    And(a=part1_1, b=nc, out=part1_2);
-    And(a=part1_2, b=d, out=term1);
+    And(a=na, b=nb, out=and1);
+    And(a=and1, b=nc, out=and2);
+    And(a=and2, b=d, out=term1);
 
-    And(a=na, b=nb, out=part2_1);
-    And(a=part2_1, b=c, out=part2_2);
-    And(a=part2_2, b=d, out=term2);
+    And(a=na, b=nb, out=and3);
+    And(a=and3, b=c, out=and4);
+    And(a=and4, b=d, out=term2);
 
-    And(a=na, b=b, out=part3_1);
-    And(a=part3_1, b=c, out=part3_2);
-    And(a=part3_2, b=d, out=term3);
+    And(a=na, b=b, out=and5);
+    And(a=and5, b=c, out=and6);
+    And(a=and6, b=d, out=term3);
 
-    And(a=a, b=nb, out=part4_1);
-    And(a=part4_1, b=c, out=part4_2);
-    And(a=part4_2, b=nd, out=term4);
+    And(a=a, b=nb, out=and7);
+    And(a=and7, b=c, out=and8);
+    And(a=and8, b=nd, out=term4);
 
-    And(a=a, b=b, out=part5_1);
-    And(a=part5_1, b=nc, out=part5_2);
-    And(a=part5_2, b=nd, out=term5);
+    And(a=a, b=b, out=and9);
+    And(a=and9, b=nc, out=and10);
+    And(a=and10, b=nd, out=term5);
 
-    And(a=a, b=b, out=part6_1);
-    And(a=part6_1, b=nc, out=part6_2);
-    And(a=part6_2, b=d, out=term6);
+    And(a=a, b=b, out=and11);
+    And(a=and11, b=nc, out=and12);
+    And(a=and12, b=d, out=term6);
 
     Or(a=term1, b=term2, out=or1);
     Or(a=or1, b=term3, out=or2);
