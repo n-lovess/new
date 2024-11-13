@@ -3,19 +3,19 @@ CHIP A6Q2201830364 {
     OUT f;
 
     PARTS:
-
+ 
     Not(in=a, out=na);
     Not(in=b, out=nb);
     Not(in=c, out=nc);
     Not(in=d, out=nd);
 
 
-    And(a=na, b=nb, c=nc, d=d, out=term1);    
-    And(a=na, b=nb, c=c, d=d, out=term2);   
-    And(a=na, b=b, c=c, d=d, out=term3);     
-    And(a=a, b=nb, c=c, d=nd, out=term4);  
+    And(a=na, b=nb, c=nc, d=d, out=term1);   
+    And(a=na, b=nb, c=c, d=d, out=term2);  
+    And(a=na, b=b, c=c, d=d, out=term3);   
+    And(a=a, b=nb, c=c, d=nd, out=term4);    
     And(a=a, b=b, c=nc, d=nd, out=term5);    
-    And(a=a, b=b, c=nc, d=d, out=term6);   
+    And(a=a, b=b, c=nc, d=d, out=term6);      
 
 
     Or(a=term1, b=term2, out=or1);
