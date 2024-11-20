@@ -1,4 +1,4 @@
-CHIP Decoder201830364 {
+CHIP Decoder201830364 { 
     IN A, B, C, D;  // 4-bit binary input
     OUT a, b, c, d, e, f, g;  // 7-segment display output
 
