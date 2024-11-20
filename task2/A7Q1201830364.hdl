@@ -4,13 +4,13 @@ CHIP DecoderSegment201830364 {
 
     PARTS:
 
-    NOT(a=A, out=A_);  // 
-    NOT(a=D, out=D_);  //
+    NOT(a=A, out=A');  
+    NOT(a=D, out=D');  
 
 
-    AND(a=A_, b=B, out=term1); 
+    AND(a=A', b=B, out=term1); 
     AND(a=A, b=C, out=term2);  
-    AND(a=B, b=D_, out=term3);  
+    AND(a=B, b=D', out=term3);  
 
 
     OR(a=term1, b=term2, out=or1);  
