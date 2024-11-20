@@ -1,13 +1,18 @@
-CHIP DecoderSegment201830364 {  
-    IN A, B, C, D;  
-    OUT d;  
-    
-    PARTS:
-    NOT(a=A, out=A_);  // A'
-    AND(a=A_, b=B, out=temp1);  // A'B
-    AND(a=A, b=C, out=temp2);  // AC
-    NOT(a=D, out=D_);  // D'
-    AND(a=B, b=D_, out=temp3);  // BD'
-    OR(a=temp1, b=temp2, out=out1);  // A'B + AC
-    OR(a=out1, b=temp3, out=d);  // A'B + AC + BD'
+CHIP DecoderSegment201830364 { 
+    IN A, B, C, D;  
+    OUT d;  
+
+    PARTS:
+
+    NOT(a=A, out=A_);  // A'
+    NOT(a=D, out=D_);  // D'
+
+
+    AND(a=A_, b=B, out=and1);  // A'B
+    AND(a=A, b=C, out=and2);  // AC
+    AND(a=B, b=D_, out=and3);  // BD'
+
+
+    OR(a=and1, b=and2, out=or1);  // A'B + AC
+    OR(a=or1, b=and3, out=d);  // Final output A'B + AC + BD'
 }
