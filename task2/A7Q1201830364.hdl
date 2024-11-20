@@ -1,0 +1,7 @@
+CHIP DecoderSegment<your student number> {
+    IN A, B, C, D;
+    OUT d;
+    
+    PARTS:
+    // Define the logic gates here based on the Boolean equation derived for d.
+}
