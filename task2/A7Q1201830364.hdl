@@ -1,10 +1,13 @@
 CHIP DecoderSegment201830364 {
-    IN A, B, C, D;    
-    OUT d;           
+    IN A, B, C, D;
+    OUT d;
     
     PARTS:
-    AND(a= A, b= B, out= temp1);  
-    AND(a= A, b= C, out= temp2);  
-    AND(a= B, b= D, out= temp3); 
-    OR(a= temp1, b= temp2, out= d); 
+    NOT(a=A, out=A_);
+    AND(a=A_, b=B, out=temp1);
+    AND(a=A, b=C, out=temp2);
+    NOT(a=D, out=D_);
+    AND(a=B, b=D_, out=temp3);
+    OR(a=temp1, b=temp2, out=out1);
+    OR(a=out1, b=temp3, out=d);
 }
