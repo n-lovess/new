@@ -1,0 +1,69 @@
+CHIP Decoder201830364 {
+    IN A, B, C, D;  // 4-bit binary input
+    OUT a, b, c, d, e, f, g;  // 7-segment display output
+
+    PARTS:
+    // Logic for segment a
+    Or8(a1=!A & !B & C & !D,
+        a2=!A & B & !C & D,
+        a3=A & !B & C & D,
+        a4=A & B & !C & !D,
+        a5=A & B & C & !D,
+        a6=A & !B & !C & !D,
+        a7=!A & !B & !C & D,
+        a8=!A & B & C & D,
+        out=a);
+
+    // Logic for segment b
+    Or6(b1=A & B & !C & !D,
+        b2=A & B & C & D,
+        b3=A & !B & !C & D,
+        b4=!A & B & !C & !D,
+        b5=!A & B & !C & D,
+        b6=!A & B & C & !D,
+        out=b);
+
+    // Logic for segment c
+    Or5(c1=A & B & !C & !D,
+        c2=A & B & C & !D,
+        c3=!A & !B & C & !D,
+        c4=!A & B & !C & D,
+        c5=!A & B & C & D,
+        out=c);
+
+    // Logic for segment d
+    Or7(d1=!A & !B & C & !D,
+        d2=!A & B & !C & D,
+        d3=A & !B & !C & !D,
+        d4=A & B & !C & !D,
+        d5=A & B & C & D,
+        d6=A & !B & C & D,
+        d7=!A & !B & !C & D,
+        out=d);
+
+    // Logic for segment e
+    Or4(e1=A & B & !C & !D,
+        e2=A & !B & !C & !D,
+        e3=!A & !B & !C & D,
+        e4=!A & !B & C & !D,
+        out=e);
+
+    // Logic for segment f
+    Or6(f1=A & B & !C & !D,
+        f2=A & B & C & !D,
+        f3=A & !B & C & !D,
+        f4=A & !B & !C & !D,
+        f5=!A & !B & C & !D,
+        f6=!A & B & C & D,
+        out=f);
+
+    // Logic for segment g
+    Or7(g1=A & B & !C & !D,
+        g2=A & B & C & !D,
+        g3=A & !B & C & D,
+        g4=!A & !B & C & !D,
+        g5=!A & B & !C & !D,
+        g6=!A & !B & !C & D,
+        g7=!A & B & C & D,
+        out=g);
+}
