@@ -3,7 +3,7 @@ class VirtualPet:
         self.__name = name
         self.__hunger = 0
         self.__happiness = 50
-        self.__energy = 6
+        self.__energy = 10
 
     @property
     def name(self):
