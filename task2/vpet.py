@@ -1,9 +1,9 @@
 class VirtualPet:
     def __init__(self, name: str):
         self.__name = name
-        self.__hunger = 4
+        self.__hunger = 0
         self.__happiness = 50
-        self.__energy = 16
+        self.__energy = 6
 
     @property
     def name(self):
