@@ -3,10 +3,9 @@ CHIP DisplayCounter {
     OUT a, b, c, d, e, f, g;
 
     PARTS:
-    Mux16(a=false, b=false, sel=reset, out=resetValue);
+    Mux16(a=false, b=incrementedValue, sel=inc, out=nextValue);
+    Mux16(a=nextValue, b=false, sel=reset, out=counterInput);
+    Register(in=counterInput, load=true, out=counterValue);
     Inc16(in=counterValue, out=incrementedValue);
-    Mux16(a=counterValue, b=incrementedValue, sel=inc, out=nextValue);
-    Mux16(a=nextValue, b=resetValue, sel=reset, out=counterInput);
-    Register(in=counterInput, load=inc, out=counterValue);
     SevenSegmentDecoder(in=counterValue[0..3], out[0]=a, out[1]=b, out[2]=c, out[3]=d, out[4]=e, out[5]=f, out[6]=g);
 }
