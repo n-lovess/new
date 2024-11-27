@@ -3,36 +3,46 @@ CHIP DecoderSegment201830364 {
     OUT d;
 
     PARTS:
-    // Negations (NOT gates)
+    // Negations
     Not(in=A, out=notA);
     Not(in=B, out=notB);
     Not(in=C, out=notC);
     Not(in=D, out=notD);
 
-    // Term 1: !A & !B & !C & !D
+    // Terms for d = 1
     And(a=notA, b=notB, out=term1part1);
     And(a=term1part1, b=notC, out=term1part2);
-    And(a=term1part2, b=notD, out=term1);
+    And(a=term1part2, b=notD, out=term1); // Hex 0
 
-    // Term 2: !A & C
-    And(a=notA, b=C, out=term2);
+    And(a=notA, b=notB, out=term2part1);
+    And(a=term2part1, b=C, out=term2part2);
+    And(a=term2part2, b=D, out=term2); // Hex 3
 
-    // Term 3: !A & B & !C
     And(a=notA, b=B, out=term3part1);
-    And(a=term3part1, b=notC, out=term3);
+    And(a=term3part1, b=notC, out=term3part2);
+    And(a=term3part2, b=notD, out=term3); // Hex 4
 
-    // Term 4: A & !B & !C & !D
-    And(a=A, b=notB, out=term4part1);
-    And(a=term4part1, b=notC, out=term4part2);
-    And(a=term4part2, b=notD, out=term4);
+    And(a=notA, b=B, out=term4part1);
+    And(a=term4part1, b=C, out=term4part2);
+    And(a=term4part2, b=notD, out=term4); // Hex 6
 
-    // Term 5: A & B & C
-    And(a=A, b=B, out=term5part1);
-    And(a=term5part1, b=C, out=term5);
+    And(a=A, b=notB, out=term5part1);
+    And(a=term5part1, b=notC, out=term5part2);
+    And(a=term5part2, b=notD, out=term5); // Hex 8
 
-    // Combine all terms using OR gates
+    And(a=A, b=B, out=term6part1);
+    And(a=term6part1, b=notC, out=term6part2);
+    And(a=term6part2, b=D, out=term6); // Hex D
+
+    And(a=A, b=B, out=term7part1);
+    And(a=term7part1, b=C, out=term7part2);
+    And(a=term7part2, b=notD, out=term7); // Hex E
+
+    // Combine terms
     Or(a=term1, b=term2, out=inter1);
     Or(a=inter1, b=term3, out=inter2);
     Or(a=inter2, b=term4, out=inter3);
-    Or(a=inter3, b=term5, out=d);
+    Or(a=inter3, b=term5, out=inter4);
+    Or(a=inter4, b=term6, out=inter5);
+    Or(a=inter5, b=term7, out=d);
 }
