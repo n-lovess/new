@@ -3,30 +3,30 @@ CHIP DecoderSegment201830364 {
     OUT d;
 
     PARTS:
-    // Negations
+    // Negations (NOT gates)
     Not(in=A, out=notA);
     Not(in=B, out=notB);
     Not(in=C, out=notC);
     Not(in=D, out=notD);
 
-    // Term 1: !A !B !C !D
+    // Term 1: !A & !B & !C & !D
     And(a=notA, b=notB, out=term1part1);
     And(a=term1part1, b=notC, out=term1part2);
     And(a=term1part2, b=notD, out=term1);
 
-    // Term 2: !A C
+    // Term 2: !A & C
     And(a=notA, b=C, out=term2);
 
-    // Term 3: !A B !C
+    // Term 3: !A & B & !C
     And(a=notA, b=B, out=term3part1);
     And(a=term3part1, b=notC, out=term3);
 
-    // Term 4: A !B !C !D
+    // Term 4: A & !B & !C & !D
     And(a=A, b=notB, out=term4part1);
     And(a=term4part1, b=notC, out=term4part2);
     And(a=term4part2, b=notD, out=term4);
 
-    // Term 5: A B C
+    // Term 5: A & B & C
     And(a=A, b=B, out=term5part1);
     And(a=term5part1, b=C, out=term5);
 
