@@ -12,7 +12,7 @@ CHIP DecoderSegment201830364 {
     // Terms for d = 1
     And(a=notA, b=notB, out=term1part1);
     And(a=term1part1, b=notC, out=term1part2);
-    And(a=term1part2, b=D, out=term1); // Hex 0
+    And(a=term1part2, b=notD, out=term1); // Hex 0
 
     And(a=notA, b=notB, out=term2part1);
     And(a=term2part1, b=C, out=term2part2);
