@@ -3,16 +3,10 @@ CHIP DisplayCounter2304156 {
     OUT a, b, c, d, e, f, g;
 
     PARTS:
-    // A 4-bit register to store the counter value.
-    Register(in=nextValue, load=load, out=currentValue);
-
-    // Incrementer to calculate the next counter value.
-    Inc16(in=currentValue, out=incrementedValue);
-
-    // Logic to handle reset and increment.
-    Mux16(a=false, b=incrementedValue, sel=inc, out=nextValue);  // Increment or stay the same.
-    Mux16(a=false, b=nextValue, sel=reset, out=nextValue);       // Reset to zero when reset is high.
-
-    // 7-segment decoder to drive the outputs a-g.
-    SevenSegmentDecoder(in=currentValue[0..3], out[0]=a, out[1]=b, out[2]=c, out[3]=d, out[4]=e, out[5]=f, out[6]=g);
+    Register(in=counterInput, load=load, out=counterValue);
+    Inc16(in=counterValue, out=incrementedValue);
+    Mux16(a=false, b=incrementedValue, sel=inc, out=incrementedOrHold);
+    Mux16(a=false, b=incrementedOrHold, sel=reset, out=counterInput);
+    Or(a=inc, b=reset, out=load);
+    SevenSegmentDecoder(in=counterValue[0..3], out[0]=a, out[1]=b, out[2]=c, out[3]=d, out[4]=e, out[5]=f, out[6]=g);
 }
