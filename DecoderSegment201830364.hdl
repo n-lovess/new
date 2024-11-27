@@ -9,28 +9,24 @@ CHIP DecoderSegment201830364 {
     Not(in=C, out=notC);
     Not(in=D, out=notD);
 
-    // Terms for `d = 1`
+    // Terms for d
     And(a=notA, b=notB, out=term1part1);
     And(a=term1part1, b=notC, out=term1part2);
-    And(a=term1part2, b=notD, out=term1); // Hex 0 (0000)
+    And(a=term1part2, b=notD, out=term1); // First term: !A!B!C!D
 
-    And(a=notA, b=notB, out=term2part1);
-    And(a=term2part1, b=C, out=term2); // Hex 2 (0010) and Hex 3 (0011)
+    And(a=notA, b=C, out=term2); // Second term: !A C
 
-    And(a=notA, b=B, out=term3part1);
-    And(a=term3part1, b=C, out=term3); // Hex 4 (0100), Hex 5 (0101), Hex 6 (0110)
+    And(a=notB, b=C, out=term3part1);
+    And(a=term3part1, b=notD, out=term3); // Third term: !B C !D
 
-    And(a=A, b=notB, out=term4part1);
-    And(a=term4part1, b=notC, out=term4); // Hex 8 (1000) and Hex 9 (1001)
+    And(a=B, b=C, out=term4); // Fourth term: B C
 
-    And(a=A, b=B, out=term5part1);
-    And(a=term5part1, b=notC, out=term5); // Hex A (1010) and Hex D (1101)
+    And(a=A, b=notC, out=term5part1);
+    And(a=term5part1, b=notD, out=term5); // Fifth term: A !C !D
 
-    And(a=A, b=B, out=term6part1);
-    And(a=term6part1, b=C, out=term6part2);
-    And(a=term6part2, b=notD, out=term6); // Hex E (1110)
+    And(a=A, b=C, out=term6); // Sixth term: A C
 
-    // Combine terms
+    // Combine all terms
     Or(a=term1, b=term2, out=inter1);
     Or(a=inter1, b=term3, out=inter2);
     Or(a=inter2, b=term4, out=inter3);
