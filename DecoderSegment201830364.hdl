@@ -9,24 +9,29 @@ CHIP DecoderSegment201830364 {
     Not(in=C, out=notC);
     Not(in=D, out=notD);
 
-    // Terms for d
+    // First term: !A !B !C !D (0000)
     And(a=notA, b=notB, out=term1part1);
     And(a=term1part1, b=notC, out=term1part2);
-    And(a=term1part2, b=notD, out=term1); // First term: !A!B!C!D
+    And(a=term1part2, b=notD, out=term1);
 
-    And(a=notA, b=C, out=term2); // Second term: !A C
+    // Second term: !A C (0010, 0011)
+    And(a=notA, b=C, out=term2);
 
+    // Third term: !B C !D (0100, 0101, 0110)
     And(a=notB, b=C, out=term3part1);
-    And(a=term3part1, b=notD, out=term3); // Third term: !B C !D
+    And(a=term3part1, b=notD, out=term3);
 
-    And(a=B, b=C, out=term4); // Fourth term: B C
+    // Fourth term: B C (1000, 1001, 1010, 1011)
+    And(a=B, b=C, out=term4);
 
+    // Fifth term: A !C !D (1101)
     And(a=A, b=notC, out=term5part1);
-    And(a=term5part1, b=notD, out=term5); // Fifth term: A !C !D
+    And(a=term5part1, b=notD, out=term5);
 
-    And(a=A, b=C, out=term6); // Sixth term: A C
+    // Sixth term: A C (1000, 1001, 1101, 1110)
+    And(a=A, b=C, out=term6);
 
-    // Combine all terms
+    // Combine all terms using OR gates
     Or(a=term1, b=term2, out=inter1);
     Or(a=inter1, b=term3, out=inter2);
     Or(a=inter2, b=term4, out=inter3);
