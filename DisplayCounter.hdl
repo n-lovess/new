@@ -1,1 +1,7 @@
-//
+CHIP DisplayCounter {
+    IN inc, reset;
+    OUT a, b, c, d, e, f, g;
+
+    PARTS:
+    Not(in=inc, out=a);
+}
