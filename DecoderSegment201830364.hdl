@@ -9,7 +9,7 @@ CHIP DecoderSegment201830364 {
     Not(in=C, out=notC);
     Not(in=D, out=notD);
 
-    // Terms where segment 'd' is ON
+    // Terms where segment 'd' is ON (replace incorrect `c` references with `C`)
     And(a=notA, b=notB, c=notC, d=D, out=term1); // Hex 1
     And(a=notA, b=B, c=notC, d=D, out=term2);    // Hex 3
     And(a=A, b=notB, c=notC, d=notD, out=term3); // Hex 4
