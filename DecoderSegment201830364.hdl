@@ -3,49 +3,39 @@ CHIP DecoderSegment201830364 {
     OUT d;
 
     PARTS:
-    // Negations
     Not(in=A, out=notA);
     Not(in=B, out=notB);
     Not(in=C, out=notC);
     Not(in=D, out=notD);
 
-    // Terms for d = 1
-    // Hex 0: notA and notB and notC and notD
     And(a=notA, b=notB, out=term1part1);
     And(a=term1part1, b=notC, out=term1part2);
     And(a=term1part2, b=notD, out=term1);
 
-    // Hex 3: notA and notB and C and D
     And(a=notA, b=notB, out=term2part1);
     And(a=term2part1, b=C, out=term2part2);
     And(a=term2part2, b=D, out=term2);
 
-    // Hex 4: notA and B and notC and notD
     And(a=notA, b=B, out=term3part1);
     And(a=term3part1, b=notC, out=term3part2);
     And(a=term3part2, b=notD, out=term3);
 
-    // Hex 6: notA and B and C and notD
     And(a=notA, b=B, out=term4part1);
     And(a=term4part1, b=C, out=term4part2);
     And(a=term4part2, b=notD, out=term4);
 
-    // Hex 8: A and notB and notC and notD
     And(a=A, b=notB, out=term5part1);
     And(a=term5part1, b=notC, out=term5part2);
     And(a=term5part2, b=notD, out=term5);
 
-    // Hex D: A and B and notC and D
     And(a=A, b=B, out=term6part1);
     And(a=term6part1, b=notC, out=term6part2);
     And(a=term6part2, b=D, out=term6);
 
-    // Hex E: A and B and C and notD
     And(a=A, b=B, out=term7part1);
     And(a=term7part1, b=C, out=term7part2);
     And(a=term7part2, b=notD, out=term7);
 
-    // Combine all terms for d
     Or(a=term1, b=term2, out=inter1);
     Or(a=inter1, b=term3, out=inter2);
     Or(a=inter2, b=term4, out=inter3);
