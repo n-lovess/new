@@ -30,7 +30,7 @@
 
     And(a=A, b=B, out=term6part1);
     And(a=term6part1, b=notC, out=term6part2);
-    And(a=term6part2, b=D, out=term6);
+    And(a=term6part2, b=D, out=term6); 
 
     And(a=A, b=B, out=term7part1);
     And(a=term7part1, b=C, out=term7part2);
