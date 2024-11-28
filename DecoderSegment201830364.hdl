@@ -9,13 +9,24 @@ CHIP DecoderSegment201830364 {
     Not(in=C, out=notC);
     Not(in=D, out=notD);
 
-    // Terms for d = 1 (derived from the truth table and Boolean logic)
-    And(a=notA, b=notB, c=C, out=term1);     // Hex 2
-    And(a=notA, b=B, c=notC, out=term2);     // Hex 4
-    And(a=A, b=notB, c=notC, out=term3);     // Hex 8
-    And(a=A, b=notB, c=D, out=term4);        // Hex 9
-    And(a=A, b=B, c=notC, out=term5);        // Hex D
-    And(a=A, b=B, c=C, out=term6);           // Hex E
+    // Terms for d = 1 (Hex 2, 4, 8, 9, D, E)
+    And(a=notA, b=notB, out=term1part1);  // Hex 2 part 1
+    And(a=term1part1, b=C, out=term1);    // Hex 2
+
+    And(a=notA, b=B, out=term2part1);     // Hex 4 part 1
+    And(a=term2part1, b=notC, out=term2); // Hex 4
+
+    And(a=A, b=notB, out=term3part1);     // Hex 8 part 1
+    And(a=term3part1, b=notC, out=term3); // Hex 8
+
+    And(a=A, b=notB, out=term4part1);     // Hex 9 part 1
+    And(a=term4part1, b=D, out=term4);    // Hex 9
+
+    And(a=A, b=B, out=term5part1);        // Hex D part 1
+    And(a=term5part1, b=notC, out=term5); // Hex D
+
+    And(a=A, b=B, out=term6part1);        // Hex E part 1
+    And(a=term6part1, b=C, out=term6);    // Hex E
 
     // Combine terms
     Or(a=term1, b=term2, out=inter1);
