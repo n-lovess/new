@@ -38,11 +38,16 @@ CHIP DecoderSegment201830364 {
     And(a=term7part1, b=C, out=term7part2);
     And(a=term7part2, b=notD, out=term7); // Hex E
 
+    And(a=A, b=B, out=term8part1);
+    And(a=term8part1, b=C, out=term8part2);
+    And(a=term8part2, b=D, out=term8); // Hex F
+
     // Combine terms
     Or(a=term1, b=term2, out=inter1);
     Or(a=inter1, b=term3, out=inter2);
     Or(a=inter2, b=term4, out=inter3);
     Or(a=inter3, b=term5, out=inter4);
     Or(a=inter4, b=term6, out=inter5);
-    Or(a=inter5, b=term7, out=d);
+    Or(a=inter5, b=term7, out=inter6);
+    Or(a=inter6, b=term8, out=d);
 }
