@@ -1,6 +1,6 @@
 CHIP DecoderSegment201830364 {
     IN A, B, C, D; 
-    OUT d;         
+    OUT d;       
 
     PARTS:
     Not(in=A, out=notA);
@@ -15,6 +15,6 @@ CHIP DecoderSegment201830364 {
 
     Or(a=term1, b=term2, out=or1);
     Or(a=term3, b=term4, out=or2);
-    Or(a=or1, b=or2, out=d);
+    Or(a=or1, b=or2, out=d); 
 }
 
