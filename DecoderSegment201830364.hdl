@@ -14,26 +14,22 @@ And(a=term1part1, b=notC, out=term1part2);
 And(a=term1part2, b=notD, out=term1);
 
 And(a=notA, b=B, out=term2part1);
-And(a=term2part1, b=notC, out=term2part2);
-And(a=term2part2, b=D, out=term2);
+And(a=term2part1, b=notC, out=term2);
 
-And(a=notA, b=B, out=term3part1);
-And(a=term3part1, b=C, out=term3);
+And(a=A, b=notB, out=term3part1);
+And(a=term3part1, b=notC, out=term3);
 
-And(a=A, b=notB, out=term4part1);
+And(a=A, b=B, out=term4part1);
 And(a=term4part1, b=notC, out=term4);
 
 And(a=A, b=B, out=term5part1);
-And(a=term5part1, b=notC, out=term5);
-
-And(a=A, b=B, out=term6part1);
-And(a=term6part1, b=C, out=term6);
+And(a=term5part1, b=C, out=term5);
 
 Or(a=term1, b=term2, out=inter1);
 Or(a=inter1, b=term3, out=inter2);
 Or(a=inter2, b=term4, out=inter3);
-Or(a=inter3, b=term5, out=inter4);
-Or(a=inter4, b=term6, out=d);
+Or(a=inter3, b=term5, out=d);
 }
+
 
 
