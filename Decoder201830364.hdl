@@ -87,43 +87,43 @@ CHIP Decoder201830364 {
     Or(a=ans1d, b=ans2d, out=d);
 
     // Segment e 
-    Not(in=A, out=notA);
-    Not(in=B, out=notB);
-    Not(in=C, out=notC);
-    Not(in=D, out=notD);
-    And(a=notA, b=B, out=term1_e);
-    And(a=A, b=notB, out=term2_e);
-    And(a=notC, b=D, out=term3_e);
-    And(a=notA, b=notC, out=term4_e);
-    And(a=notA, b=D, out=term5_e);
-    Or(a=term1_e, b=term2_e, out=inter1_e);
-    Or(a=term3_e, b=term4_e, out=inter2_e);
-    Or(a=inter1_e, b=inter2_e, out=inter3_e);
-    Or(a=inter3_e, b=term5_e, out=e);
+    Not(in=A, out=notAe);
+    Not(in=B, out=notBe);
+    Not(in=C, out=notCe);
+    Not(in=D, out=notDe);
+    And(a=notAe, b=B, out=term1e);
+    And(a=A, b=notBe, out=term2e);
+    And(a=notCe, b=D, out=term3e);
+    And(a=notAe, b=notCe, out=term4e);
+    And(a=notAe, b=D, out=term5e);
+    Or(a=term1e, b=term2e, out=inter1e);
+    Or(a=term3e, b=term4e, out=inter2e);
+    Or(a=inter1e, b=inter2e, out=inter3e);
+    Or(a=inter3e, b=term5e, out=e);
 
     // Segment f 
-    Not(in=A, out=notA);
-    Not(in=B, out=notB);
-    Not(in=C, out=notC);
-    Not(in=D, out=notD);
-    And(a=notA, b=B, out=term1_f);
-    And(a=A, b=notB, out=term2_f);
-    And(a=notA, b=C, out=term3_f);
-    And(a=notA, b=D, out=term4_f);
-    And(a=notB, b=notC, out=term5_f);
-    Or(a=term1_f, b=term2_f, out=inter1_f);
-    Or(a=term3_f, b=term4_f, out=inter2_f);
-    Or(a=inter1_f, b=inter2_f, out=inter3_f);
-    Or(a=inter3_f, b=term5_f, out=f);
+    Not(in=A, out=notAf);
+    Not(in=B, out=notBf);
+    Not(in=C, out=notCf);
+    Not(in=D, out=notDf);
+    And(a=notAf, b=B, out=term1f);
+    And(a=A, b=notBf, out=term2f);
+    And(a=notAf, b=C, out=term3f);
+    And(a=notAf, b=D, out=term4f);
+    And(a=notBf, b=notCf, out=term5f);
+    Or(a=term1f, b=term2f, out=inter1f);
+    Or(a=term3f, b=term4f, out=inter2f);
+    Or(a=inter1f, b=inter2f, out=inter3f);
+    Or(a=inter3f, b=term5f, out=f);
 
     // Segment g
     Not(in=A, out=notAg);
     Not(in=B, out=notBg);
     Not(in=C, out=notCg);
     Not(in=D, out=notDg);
-    And(a=notBg, b=C, out=term1g_g);
-    And(a=B, b=notCg, out=term2g_g);
-    And(a=B, b=notDg, out=term3g_g);
-    Or(a=term1g_g, b=term2g_g, out=inter1g_g);
-    Or(a=inter1g_g, b=term3g_g, out=g);
+    And(a=notBg, b=C, out=term1g);
+    And(a=B, b=notCg, out=term2g);
+    And(a=B, b=notDg, out=term3g);
+    Or(a=term1g, b=term2g, out=inter1g);
+    Or(a=inter1g, b=term3g, out=g);
 }
