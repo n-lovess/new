@@ -4,28 +4,28 @@ CHIP Decoder201830364 {
 
     PARTS:
     // Segment a
-    Not(in=A, out=notAa);
-    Not(in=B, out=notBa);
-    Not(in=C, out=notCa);
-    Not(in=D, out=notDa);
-    And(a=notAa, b=notBa, out=term1a);
-    And(a=notCa, b=notDa, out=term2a);
-    And(a=A, b=notBa, out=term3a);
+    Not(in=A, out=notA);
+    Not(in=B, out=notB);
+    Not(in=C, out=notC);
+    Not(in=D, out=notD);
+    And(a=notA, b=notB, out=term1a);
+    And(a=notC, b=notD, out=term2a);
+    And(a=A, b=notB, out=term3a);
     Or(a=term1a, b=term2a, out=inter1a);
     Or(a=inter1a, b=term3a, out=a);
 
     // Segment b
-    Not(in=A, out=notAb);
-    Not(in=B, out=notBb);
-    Not(in=C, out=notCb);
-    Not(in=D, out=notDb);
-    And(a=notAb, b=notBb, out=term1b);
+    Not(in=A, out=notA);
+    Not(in=B, out=notB);
+    Not(in=C, out=notC);
+    Not(in=D, out=notD);
+    And(a=notA, b=notB, out=term1b);
     And(a=B, b=C, out=term2b);
-    And(a=notCb, b=notDb, out=term3b);
+    And(a=notC, b=notD, out=term3b);
     Or(a=term1b, b=term2b, out=inter1b);
     Or(a=inter1b, b=term3b, out=b);
 
-    // Segment c 
+    // Segment c
     Not(in=A, out=n1);
     Not(in=B, out=n2);
     Not(in=C, out=n3);
@@ -71,59 +71,26 @@ CHIP Decoder201830364 {
     Or(a=on0268AbCdE, b=onF, out=c);
 
     // Segment d 
-    Not(in=A, out=notAd);
-    Not(in=B, out=notBd);
-    Not(in=C, out=notCd);
-    Not(in=D, out=notDd);
-    And(a=notAd, b=B, out=term1ad);
-    And(a=term1ad, b=notCd, out=term1d);
-    And(a=A, b=notBd, out=term2d);
-    And(a=A, b=C, out=term3d);
-    And(a=notCd, b=notDd, out=term4d);
-    And(a=B, b=notDd, out=term5d);
-    Or(a=term1d, b=term2d, out=ans1d);
-    Or(a=term3d, b=term4d, out=ans2ad);
-    Or(a=term5d, b=ans2ad, out=ans2d);
-    Or(a=ans1d, b=ans2d, out=d);
+    Not(in=A, out=notA);
+    Not(in=B, out=notB);
+    Not(in=C, out=notC);
+    Not(in=D, out=notD);
+    And(a=notA, b=B, out=term1d);
+    And(a=term1d, b=notC, out=inter1d);
+    Or(a=inter1d, b=D, out=d);
 
-    // Segment e 
-    Not(in=A, out=notAe);
-    Not(in=B, out=notBe);
-    Not(in=C, out=notCe);
-    Not(in=D, out=notDe);
-    And(a=notAe, b=B, out=term1e);
-    And(a=A, b=notBe, out=term2e);
-    And(a=notCe, b=D, out=term3e);
-    And(a=notAe, b=notCe, out=term4e);
-    And(a=notAe, b=D, out=term5e);
-    Or(a=term1e, b=term2e, out=inter1e);
-    Or(a=term3e, b=term4e, out=inter2e);
-    Or(a=inter1e, b=inter2e, out=inter3e);
-    Or(a=inter3e, b=term5e, out=e);
+    // Segment e
+    Not(in=A, out=notA);
+    And(a=A, b=C, out=inter1e);
+    Or(a=inter1e, b=B, out=e);
 
-    // Segment f 
-    Not(in=A, out=notAf);
-    Not(in=B, out=notBf);
-    Not(in=C, out=notCf);
-    Not(in=D, out=notDf);
-    And(a=notAf, b=B, out=term1f);
-    And(a=A, b=notBf, out=term2f);
-    And(a=notAf, b=C, out=term3f);
-    And(a=notAf, b=D, out=term4f);
-    And(a=notBf, b=notCf, out=term5f);
-    Or(a=term1f, b=term2f, out=inter1f);
-    Or(a=term3f, b=term4f, out=inter2f);
-    Or(a=inter1f, b=inter2f, out=inter3f);
-    Or(a=inter3f, b=term5f, out=f);
+    // Segment f
+    Not(in=B, out=notB);
+    And(a=A, b=notB, out=inter1f);
+    Or(a=inter1f, b=C, out=f);
 
     // Segment g
-    Not(in=A, out=notAg);
-    Not(in=B, out=notBg);
-    Not(in=C, out=notCg);
-    Not(in=D, out=notDg);
-    And(a=notBg, b=C, out=term1g);
-    And(a=B, b=notCg, out=term2g);
-    And(a=B, b=notDg, out=term3g);
-    Or(a=term1g, b=term2g, out=inter1g);
-    Or(a=inter1g, b=term3g, out=g);
+    Not(in=D, out=notD);
+    And(a=A, b=notD, out=inter1g);
+    Or(a=inter1g, b=C, out=g);
 }
