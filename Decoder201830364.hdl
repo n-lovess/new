@@ -8,7 +8,7 @@ CHIP Decoder201830364 {
     Not(in=B, out=notBa);
     Not(in=C, out=notCa);
     Not(in=D, out=notDa);
-    And(a=notAa, b=notBa, out=term1a_a);
+    And(a=notAa, b=notBa, out=term1a_a); 
     And(a=notCa, b=notDa, out=term2a_a);
     And(a=A, b=notBa, out=term3a_a);
     Or(a=term1a_a, b=term2a_a, out=inter1a_a);
@@ -86,7 +86,7 @@ CHIP Decoder201830364 {
     Or(a=term5_d, b=ans2a_d, out=ans2_d);
     Or(a=ans1_d, b=ans2_d, out=d);
 
-    // Segment e
+    // Segment e 
     Not(in=A, out=notA);
     Not(in=B, out=notB);
     Not(in=C, out=notC);
