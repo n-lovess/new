@@ -200,7 +200,7 @@ CHIP Decoder201830364 {
     And(a=notAg, b=notBg, out=term3g);
 
     And(a=A, b=notBg, out=term4ag);
-    And(a=term4ag, b=notCg, out=term4g;
+    And(a=term4ag, b=notCg, out=term4g);
 
     And(a=notAg, b=notCg, out=term5ag);
     And(a=term5ag, b=notDg, out=term5g);
