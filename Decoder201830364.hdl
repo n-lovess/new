@@ -126,5 +126,4 @@ CHIP Decoder201830364 {
     And(a=B, b=notDg, out=term3g_g);
     Or(a=term1g_g, b=term2g_g, out=inter1g_g);
     Or(a=inter1g_g, b=term3g_g, out=g);
-
 }
