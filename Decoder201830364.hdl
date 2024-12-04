@@ -71,20 +71,20 @@ CHIP Decoder201830364 {
     Or(a=on0268AbCdEc, b=onFc, out=c);
 
     // Segment d
-    Not(in=A, out=notA);
-    Not(in=B, out=notB);
-    Not(in=C, out=notC);
-    Not(in=D, out=notD);
-    And(a=notA, b=B, out=term1a);
-    And(a=term1a, b=notC, out=term1);
-    And(a=A, b=notB, out=term2);
-    And(a=A, b=C, out=term3);
-    And(a=notC, b=notD, out=term4);
-    And(a=B, b=notD, out=term5);
-    Or(a=term1, b=term2, out=ans1);
-    Or(a=term3, b=term4, out=ans2a);
-    Or(a=term5, b=ans2a, out=ans2);
-    Or(a=ans1, b=ans2, out=d);
+    Not(in=A, out=notAd);
+    Not(in=B, out=notBd);
+    Not(in=C, out=notCd);
+    Not(in=D, out=notDd);
+    And(a=notAd, b=B, out=term1ad);
+    And(a=term1ad, b=notCd, out=term1d);
+    And(a=A, b=notBd, out=term2d);
+    And(a=A, b=C, out=term3d);
+    And(a=notCd, b=notDd, out=term4d);
+    And(a=B, b=notDd, out=term5d);
+    Or(a=term1d, b=term2d, out=ans1d);
+    Or(a=term3d, b=term4d, out=ans2ad);
+    Or(a=term5d, b=ans2ad, out=ans2d);
+    Or(a=ans1d, b=ans2d, out=d);
 
     // Segment e
     Not(in=A, out=notAe);
