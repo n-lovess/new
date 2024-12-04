@@ -86,7 +86,7 @@ CHIP Decoder201830364 {
     Or(a=term5_d, b=ans2a_d, out=ans2_d);
     Or(a=ans1_d, b=ans2_d, out=d);
 
-    // Segment e 
+    // Segment e
     Not(in=A, out=notA);
     Not(in=B, out=notB);
     Not(in=C, out=notC);
