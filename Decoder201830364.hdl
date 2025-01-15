@@ -4,88 +4,50 @@ CHIP Decoder201830364 {
 
     PARTS:
 
-    // Segment a
+    // Precompute all NOT gates
     Not(in=A, out=notA);
     Not(in=B, out=notB);
     Not(in=C, out=notC);
     Not(in=D, out=notD);
 
-    And(a=notA, b=C, out=anda1);
-    And(a=anda1, b=notD, out=anda2);
-    And(a=A, b=notB, out=anda3);
-    And(a=anda3, b=notC, out=anda4);
-    And(a=B, b=D, out=anda5);
+    // Segment a logic
+    And(a=notA, b=notB, out=term1a);
+    And(a=term1a, b=notD, out=term2a);
+    And(a=A, b=C, out=term3a);
+    And(a=term3a, b=notB, out=term4a);
+    Or(a=term2a, b=term4a, out=a);
 
-    Or(a=anda2, b=anda4, out=ora1);
-    Or(a=ora1, b=anda5, out=a);
+    // Segment b logic
+    And(a=notA, b=C, out=term1b);
+    And(a=term1b, b=notD, out=term2b);
+    And(a=B, b=C, out=term3b);
+    Or(a=term2b, b=term3b, out=b);
 
-    // Segment b
-    And(a=notA, b=B, out=andb1);
-    And(a=notB, b=C, out=andb2);
-    And(a=A, b=C, out=andb3);
-    And(a=A, b=D, out=andb4);
-    And(a=notC, b=notD, out=andb5);
+    // Segment c logic
+    And(a=notB, b=C, out=term1c);
+    And(a=term1c, b=notD, out=term2c);
+    Or(a=term2c, b=B, out=c);
 
-    Or(a=andb1, b=andb2, out=orb1);
-    Or(a=orb1, b=andb3, out=orb2);
-    Or(a=orb2, b=andb4, out=orb3);
-    Or(a=orb3, b=andb5, out=b);
+    // Segment d logic
+    And(a=notA, b=B, out=term1d);
+    And(a=term1d, b=notD, out=term2d);
+    And(a=A, b=C, out=term3d);
+    Or(a=term2d, b=term3d, out=d);
 
-    // Segment c
-    And(a=notB, b=C, out=andc1);
-    And(a=A, b=notB, out=andc2);
-    And(a=A, b=D, out=andc3);
-    And(a=B, b=notC, out=andc4);
-    And(a=notA, b=notC, out=andc5);
+    // Segment e logic
+    And(a=notA, b=D, out=term1e);
+    And(a=notB, b=C, out=term2e);
+    Or(a=term1e, b=term2e, out=e);
 
-    Or(a=andc1, b=andc2, out=orc1);
-    Or(a=orc1, b=andc3, out=orc2);
-    Or(a=orc2, b=andc4, out=orc3);
-    Or(a=orc3, b=andc5, out=c);
+    // Segment f logic
+    And(a=A, b=notC, out=term1f);
+    And(a=term1f, b=D, out=term2f);
+    And(a=notB, b=C, out=term3f);
+    Or(a=term2f, b=term3f, out=f);
 
-    // Segment d
-    And(a=notA, b=notB, out=andd1);
-    And(a=andd1, b=C, out=andd2);
-    And(a=A, b=notC, out=andd3);
-    And(a=B, b=D, out=andd4);
-    And(a=notB, b=notC, out=andd5);
-
-    Or(a=andd2, b=andd3, out=ord1);
-    Or(a=ord1, b=andd4, out=ord2);
-    Or(a=ord2, b=andd5, out=d);
-
-    // Segment e
-    And(a=notA, b=D, out=ande1);
-    And(a=notA, b=notC, out=ande2);
-    And(a=notB, b=D, out=ande3);
-    And(a=B, b=notC, out=ande4);
-
-    Or(a=ande1, b=ande2, out=ore1);
-    Or(a=ore1, b=ande3, out=ore2);
-    Or(a=ore2, b=ande4, out=e);
-
-    // Segment f
-    And(a=notA, b=C, out=andf1);
-    And(a=notB, b=notC, out=andf2);
-    And(a=andf2, b=notD, out=andf3);
-    And(a=A, b=notB, out=andf4);
-    And(a=andf4, b=notC, out=andf5);
-    And(a=B, b=notD, out=andf6);
-
-    Or(a=andf1, b=andf3, out=orf1);
-    Or(a=orf1, b=andf5, out=orf2);
-    Or(a=orf2, b=andf6, out=f);
-
-    // Segment g
-    And(a=notA, b=notB, out=andg1);
-    And(a=andg1, b=D, out=andg2);
-    And(a=A, b=notB, out=andg3);
-    And(a=andg3, b=notC, out=andg4);
-    And(a=B, b=C, out=andg5);
-    And(a=notA, b=notC, out=andg6);
-
-    Or(a=andg2, b=andg4, out=org1);
-    Or(a=org1, b=andg5, out=org2);
-    Or(a=org2, b=andg6, out=g);
+    // Segment g logic
+    And(a=notA, b=C, out=term1g);
+    And(a=term1g, b=D, out=term2g);
+    And(a=A, b=notC, out=term3g);
+    Or(a=term2g, b=term3g, out=g);
 }
-
