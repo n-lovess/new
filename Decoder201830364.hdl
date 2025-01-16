@@ -132,33 +132,33 @@ CHIP Decoder201830364 {
 
     // Segment g
 
-    And(a = notA,b = NotB, out= PartA);
+    And(a = notA,b = notB, out= PartA);
 
 
 
     And(a = notA, b= B, out = firstHalfG);
-    And(a = NotC, b= NotD, out= SecondHalfG);
+    And(a = notC, b= notD, out= SecondHalfG);
     And(a= firstHalfG, b= SecondHalfG, out=PartG);
 
     And(a= notA, b= B, out=FirstHalfB);
     And(a= C, b= D, out=SecondHalfB);
     And(a=FirstHalfB, b=SecondHalfB, out=PartB);
 
-    And(a= A, b= NotB, out=FirstHalfC);
-    And(a= NotC, b= NotD, out=SecondHalfC);
+    And(a= A, b= notB, out=FirstHalfC);
+    And(a= notC, b= notD, out=SecondHalfC);
     And(a=FirstHalfC, b=SecondHalfC, out=PartC);
 
-    And(a= A, b= NotB, out=FirstHalfD);
-    And(a= C, b= NotD, out=SecondHalfD);
+    And(a= A, b= notB, out=FirstHalfD);
+    And(a= C, b= notD, out=SecondHalfD);
     And(a=FirstHalfD, b=SecondHalfD, out=PartD);
 
     And(a= A, b= B, out=FirstHalfE);
-    And(a= NotC, b= D, out=SecondHalfE);
+    And(a= notC, b= D, out=SecondHalfE);
     And(a=FirstHalfE, b=SecondHalfE, out=PartE);
 
 
-    And(a= A, b= NotB, out=FirstHalfF);
-    And(a= NotC, b= D, out=SecondHalfF);
+    And(a= A, b= notB, out=FirstHalfF);
+    And(a= notC, b= D, out=SecondHalfF);
     And(a=FirstHalfF, b=SecondHalfF, out=PartF);
 
 
