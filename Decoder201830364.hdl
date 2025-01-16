@@ -94,40 +94,40 @@ CHIP Decoder201830364 {
 
     // Segment e
 
-    And(a=notA, b=B, out=term1);       // notA AND B
-    And(a=A, b=notB, out=term2);          // A AND notB
-    And(a=notC, b=D, out=term3);          // notC AND D
-    And(a=notA, b=notC, out=term4);    // notA AND notC
-    And(a=notA, b=D, out=term5);          // notA AND D
+    And(a=notA, b=B, out=term1e);       // notA AND B
+    And(a=A, b=notB, out=term2e);          // A AND notB
+    And(a=notC, b=D, out=term3e);          // notC AND D
+    And(a=notA, b=notC, out=term4e);    // notA AND notC
+    And(a=notA, b=D, out=term5e);          // notA AND D
 
-    Or(a=term1, b=term2, out=inter1);
-    Or(a=term3, b=term4, out=inter2);
-    Or(a=inter1, b=inter2, out=inter3);
-    Or(a=inter3, b=term5, out=e);
+    Or(a=term1e, b=term2e, out=inter1e);
+    Or(a=term3e, b=term4e, out=inter2e);
+    Or(a=inter1e, b=inter2e, out=inter3e);
+    Or(a=inter3e, b=term5e, out=e);
     
 
     // Segment f
 
-    And(a=notA, b=C, out=term1);
-    And(a=B, b=C, out=term2);
+    And(a=notA, b=C, out=term1f);
+    And(a=B, b=C, out=term2f);
     And(a=notB, b=C, out=term3part1);
-    And(a=term3part1, b=notD, out=term3);
+    And(a=term3part1, b=notD, out=term3f);
     And(a=notA, b=B, out=term4part1);
-    And(a=term4part1, b=D, out=term4);
+    And(a=term4part1, b=D, out=term4f);
     And(a=A, b=notB, out=term5part1);
-    And(a=term5part1, b= notC, out=term5);
+    And(a=term5part1, b= notC, out=term5f);
     And(a=notB, b=notC, out=term6part1);
-    And(a=term6part1, b=notD, out=term6);
+    And(a=term6part1, b=notD, out=term6f);
     And(a=A, b=notC, out= term7part1);
-    And(a=term7part1, b=notD, out=term7);
+    And(a=term7part1, b=notD, out=term7f);
 
 
-    Or(a=term1, b=term2, out=inter1);
-    Or(a=term3, b=term4, out=inter2);
-    Or(a=inter1, b=inter2, out=inter3);
-    Or(a=term5, b=term6, out=inter4);
-    Or(a=inter4, b=term7, out=inter5);
-    Or(a=inter3, b=inter5, out=f);
+    Or(a=term1f, b=term2f, out=inter1f);
+    Or(a=term3f, b=term4f, out=inter2f);
+    Or(a=inter1f, b=inter2f, out=inter3f);
+    Or(a=term5f, b=term6f, out=inter4f);
+    Or(a=inter4f, b=term7f, out=inter5f);
+    Or(a=inter3f, b=inter5f, out=f);
     
 
     // Segment g
