@@ -37,21 +37,17 @@ CHIP Decoder201830364 {
 
 
     // Segment b
-    Not(in=A, out=notAb);
-    Not(in=B, out=notBb);
-    Not(in=C, out=notCb);
-    Not(in=D, out=notDb);
 
-    And(a=notAb, b=notBb, out=term1ab);
-    And(a=term1ab, b=notDb, out=term1b);
+    And(a=notA, b=notB, out=term1ab);
+    And(a=term1ab, b=notD, out=term1b);
 
-    And(a=C, b=notDb, out=term2b);
+    And(a=C, b=notD, out=term2b);
 
     And(a=A, b=B, out=term3b);
 
     And(a=A, b=C, out=term4b);
 
-    And(a=A, b=notCb, out=term5ab);
+    And(a=A, b=notC, out=term5ab);
     And(a=term5ab, b=notD, out=term5b);
 
     Or(a=term1b, b=term2b, out=ans1b);
@@ -61,10 +57,6 @@ CHIP Decoder201830364 {
     
 
     // Segment c
-    Not(in=A, out=notA);
-    Not(in=B, out=notB);
-    Not(in=C, out=notC);
-    Not(in=D, out=notD);
 
     And(a=C, b=notD, out=termC1);
     And(a=A, b=C, out=termC2);
@@ -82,10 +74,6 @@ CHIP Decoder201830364 {
 
 
     // Segment d
-    Not(in=A, out=notA);
-    Not(in=B, out=notB);
-    Not(in=C, out=notC);
-    Not(in=D, out=notD);
 
     And(a=notA, b=B, out=term1a);
     And(a=term1a, b=notC, out=term1);
@@ -106,11 +94,6 @@ CHIP Decoder201830364 {
 
     // Segment e
 
-    Not(in=A, out=notA);
-    Not(in=B, out=notB);
-    Not(in=C, out=notC);
-    Not(in=D, out=notD);
-
     And(a=notA, b=B, out=term1);       // notA AND B
     And(a=A, b=notB, out=term2);          // A AND notB
     And(a=notC, b=D, out=term3);          // notC AND D
@@ -124,10 +107,6 @@ CHIP Decoder201830364 {
     
 
     // Segment f
-    Not(in=A, out=notA);
-    Not(in=B, out=notB);
-    Not(in=C, out=notC);
-    Not(in=D, out=notD);
 
     And(a=notA, b=C, out=term1);
     And(a=B, b=C, out=term2);
@@ -152,10 +131,6 @@ CHIP Decoder201830364 {
     
 
     // Segment g
-    Not(in= A, out= NotA);
-    Not(in= B, out= NotB);
-    Not(in= C, out= NotC);
-    Not(in= D, out= NotD);
 
     And(a = NotA,b = NotB, out= PartA);
 
