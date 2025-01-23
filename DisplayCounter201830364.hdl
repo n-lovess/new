@@ -7,10 +7,10 @@ CHIP DisplayCounter201830364 {
     Mux16(a=incremented, b=false, sel=reset, out=nextValue);
     Register(in=nextValue, load=inc, out=counterOut);
 
-    Or(a=counterOut[0], b=false, out=bit0);
-    Or(a=counterOut[1], b=false, out=bit1);
-    Or(a=counterOut[2], b=false, out=bit2);
-    Or(a=counterOut[3], b=false, out=bit3);
+    And16(a=counterOut, b[0]=true, out=bit0);
+    And16(a=counterOut, b[1]=true, out=bit1);
+    And16(a=counterOut, b[2]=true, out=bit2);
+    And16(a=counterOut, b[3]=true, out=bit3);
 
     Decoder(A=bit0, B=bit1, C=bit2, D=bit3, a=a, b=b, c=c, d=d, e=e, f=f, g=g);
 }
