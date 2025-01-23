@@ -3,9 +3,9 @@ CHIP DisplayCounter201830364 {
     OUT a,b,c,d,e,f,g;
 
     PARTS:
-    Register(in=nextCount, load=load, out=currentCount);
-    Inc16(in=currentCount, out=incrementedCount);
-    Mux16(a=incrementedCount, b=false, sel=reset, out=nextCount);
-    Or(a=inc, b=reset, out=load);
-    Decoder(in=currentCount, a=a, b=b, c=c, d=d, e=e, f=f, g=g);
+    Inc16(in=counterOut, out=incremented);
+    Mux16(a=incremented, b=false, sel=reset, out=nextValue);
+    Register(in=nextValue, load=inc, out=counterOut);
+
+    Decoder(A=counterOut[0], B=counterOut[1], C=counterOut[2], D=counterOut[3], a=a, b=b, c=c, d=d, e=e, f=f, g=g);
 }
