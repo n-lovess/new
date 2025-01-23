@@ -7,8 +7,7 @@ CHIP DisplayCounter201830364 {
     Mux16(a=incremented, b=false, sel=reset, out=nextValue);
     Register(in=nextValue, load=inc, out=counterOut);
 
-    Or8Way(in=counterOut[0..7], out=bit0);
-    Or8Way(in=counterOut[8..15], out=bit1);
+    Splitter(in=counterOut, out[0]=bit0, out[1]=bit1, out[2]=bit2, out[3]=bit3);
 
-    Decoder(A=counterOut[0], B=counterOut[1], C=counterOut[2], D=counterOut[3], a=a, b=b, c=c, d=d, e=e, f=f, g=g);
+    Decoder(A=bit0, B=bit1, C=bit2, D=bit3, a=a, b=b, c=c, d=d, e=e, f=f, g=g);
 }
