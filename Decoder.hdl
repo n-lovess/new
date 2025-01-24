@@ -1,6 +1,6 @@
 CHIP Decoder {
     
-    IN A,B,C,D;
+    IN in[4];
     OUT a,b,c,d,e,f,g;
 
     PARTS:
