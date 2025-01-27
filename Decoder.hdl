@@ -1,4 +1,4 @@
-CHIP Decoder201830364 {
+CHIP Decoder {
     
     IN A,B,C,D;
     OUT a,b,c,d,e,f,g;
