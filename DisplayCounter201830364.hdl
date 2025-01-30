@@ -10,5 +10,7 @@ CHIP DisplayCounter201830364 {
     Mux16(a=currentCount, b=incrementedCount, sel=inc, out=newCount);
     Mux16(a=newCount, b=false, sel=reset, out=nextCount);
 
-    Decoder(A=currentCount[0], B=currentCount[1], C=currentCount[2], D=currentCount[3], a=a, b=b, c=c, d=d, e=e, f=f, g=g);
+    16to4(in=currentCount, A=A, B=B, C=C, D=D);
+
+    Decoder(A=A, B=B, C=C, D=D, a=a, b=b, c=c, d=d, e=e, f=f, g=g);
 }
