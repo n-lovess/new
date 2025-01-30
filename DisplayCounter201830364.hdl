@@ -8,6 +8,11 @@ CHIP DisplayCounter201830364 {
     Register(in=nextCount, load=load, out=currentCount);
     Inc16(in=currentCount, out=incrementedCount);
     Mux16(a=incrementedCount, b=false, sel=reset, out=nextCount);
-    Mux16(a=currentCount, b=false, sel=false, out=lowerBits);
-    Decoder(A=lowerBits[1], B=lowerBits[2], C=lowerBits[3], D=lowerBits[4], a=a, b=b, c=c, d=d, e=e, f=f, g=g);
+
+    Mux16(a=currentCount, b=false, sel=false, out=busA);
+    Mux16(a=currentCount, b=false, sel=false, out=busB);
+    Mux16(a=currentCount, b=false, sel=false, out=busC);
+    Mux16(a=currentCount, b=false, sel=false, out=busD);
+
+    Decoder(A=busA[1], B=busB[2], C=busC[3], D=busD[4], a=a, b=b, c=c, d=d, e=e, f=f, g=g);
 }
