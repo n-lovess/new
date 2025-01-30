@@ -1,4 +1,4 @@
-CHIP 16to4 {
+CHIP Sixteen2Four {
     IN in[16];
     OUT A,B,C,D;
 
