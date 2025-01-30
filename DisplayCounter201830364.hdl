@@ -5,12 +5,10 @@ CHIP DisplayCounter201830364 {
     PARTS:
     Xor(a=inc, b=reset, out=load);
 
-    Register(in=nextCount, load=load, out=currentCount);
+    Register(in=nextCount, load=load, out=currentCount,out[0]=mA,out[1]=mB,out[2]=mC,out[3]=mD);
     Inc16(in=currentCount, out=incrementedCount);
     Mux16(a=currentCount, b=incrementedCount, sel=inc, out=newCount);
     Mux16(a=newCount, b=false, sel=reset, out=nextCount);
 
-    Sixteen2Four(in=currentCount, A=A, B=B, C=C, D=D);
-
-    Decoder(A=A, B=B, C=C, D=D, a=a, b=b, c=c, d=d, e=e, f=f, g=g);
+    Decoder(A=mA, B=mB, C=mC, D=mD, a=a, b=b, c=c, d=d, e=e, f=f, g=g);
 }
