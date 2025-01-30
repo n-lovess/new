@@ -7,7 +7,8 @@ CHIP DisplayCounter201830364 {
 
     Register(in=nextCount, load=load, out=currentCount);
     Inc16(in=currentCount, out=incrementedCount);
-    Mux16(a=incrementedCount, b=false, sel=reset, out=nextCount);
+    Mux16(a=currentCount, b=incrementedCount, sel=inc, out=newCount);
+    Mux16(a=newCount, b=false, sel=reset, out=nextCount);
 
     And16(a[16]=currentCount, b[16]=1, out[16]=bit1);
     And16(a[16]=currentCount, b[16]=2, out[16]=bit2);
