@@ -5,8 +5,8 @@ CHIP P2S {
     PARTS:
     Register(in[0..3]=indata, load=load, out[0..3]=storedData); 
     Counter(inc=enable, reset=load, a=count0, b=count1, c=false, d=false, e=false, f=false, g=false); 
-    Mux(a=storedData, b=storedData, sel=count0, out=mux1);
-    Mux(a=storedData, b=storedData, sel=count0, out=mux2);
+    Mux(a=storedData[0..1], b=storedData[0..1], sel=count0, out=mux1);
+    Mux(a=storedData[0..1], b=storedData[0..1], sel=count0, out=mux2);
     Mux(a=mux1, b=mux2, sel=count1, out=sout);
     And(a=count0, b=count1, out=done);
     And(a=done, b=enable, out=complete);
