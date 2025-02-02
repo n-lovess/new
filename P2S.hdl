@@ -4,7 +4,7 @@ CHIP P2S {
 
     PARTS:
 
-    Register(in=indata, load=load, out=storedData);
+    Register(in[0..3]=indata, load=load, out[0..3]=storedData);
 
     Register(in=nextCount, load=enable, out=count);
     Inc16(in=count, out=incrementedCount);
