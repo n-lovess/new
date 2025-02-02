@@ -1,5 +1,5 @@
 CHIP P2S {
-    IN indata[4], enable, load;
+    IN indata[16], enable, load;
     OUT sout, complete;
 
     PARTS:
