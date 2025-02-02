@@ -7,7 +7,7 @@ CHIP P2S {
 
     Counter(inc=enable, reset=load, a=count0, b=count1, c=false, d=false, e=false, f=false, g=false); 
 
-    Mux4Way16(a[0..3]=storedData, b[0..3]=storedData, c[0..3]=storedData, d[0..3]=storedData, sel[0..1]=count0, out[0..3]=sout);
+    Mux4Way16(a[0..3]=storedData, b[0..3]=storedData, c[0..3]=storedData, d[0..3]=storedData, sel=count0, out[0..3]=sout);
 
     And(a=count0, b=count1, out=done);
     And(a=done, b=enable, out=complete);
