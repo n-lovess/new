@@ -3,15 +3,12 @@ CHIP P2S {
     OUT sout, complete;
 
     PARTS:
+    Register(in=indata, load=load, out=storedData[4]); 
 
-    Register(in[0..3]=indata, load=load, out[0..3]=storedData);
+    Counter(inc=enable, reset=load, a=count0, b=count1, c=false, d=false, e=false, f=false, g=false); 
 
-    Register(in=nextCount, load=enable, out=count);
-    Inc16(in=count, out=incrementedCount);
-    Mux16(a=count, b=false, sel=load, out=nextCount); 
+    Mux4Way16(a=storedData[0], b=storedData[1], c=storedData[2], d=storedData[3], sel[0..1]={count1, count0}, out=sout);
 
-    Mux4Way16(a=storedData[0], b=storedData[1], c=storedData[2], d=storedData[3], sel=count[0..1], out=sout);
-
-    And(a=count[1], b=count[0], out=done);
+    And(a=count0, b=count1, out=done);
     And(a=done, b=enable, out=complete);
 }
