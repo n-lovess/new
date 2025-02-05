@@ -3,8 +3,7 @@ CHIP P2S {
     OUT sout, complete;
 
     PARTS:
-    Pad4To16(in=indata, out=indata16);
-    Register(in=indata16, load=load, out[0]=storedData0,out[1]=storedData1,out[2]=storedData2,out[3]=storedData3);
+    Register(in[0..3]=indata, load=load, out[0]=storedData0,out[1]=storedData1,out[2]=storedData2,out[3]=storedData3);
     Counter(inc=enable, reset=load, a=count0, b=count1, c=false, d=false, e=false, f=false, g=false);
     Mux(a=storedData0, b=storedData1, sel=count0, out=mux1);
     Mux(a=storedData2, b=storedData3, sel=count0, out=mux2);
