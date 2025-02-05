@@ -1,13 +1,16 @@
+​
+
+
 CHIP P2S {
     IN indata[4], enable, load;
     OUT sout, complete;
 
     PARTS:
-    Register(in[0..3]=indata, load=load, out[0..3]=storedData0,out[0..3]=storedData1,out[0..3]=storedData2,out[0..3]=storedData3); 
-    Counter(inc=enable, reset=load, a=count0, b=count1, c=false, d=false, e=false, f=false, g=false); 
-    Mux(a=storedData0, b=storedData1, sel=count0, out=lowBits);
-    Mux(a=storedData2, b=storedData3, sel=count0, out=highBits);
-    Mux(a=lowBits, b=highBits, sel=count1, out=sout);
+    Register(in=indata, load=load, out[0]=storedData0,out[1]=storedData1,out[2]=storedData2,out[3]=storedData3);
+    Counter(inc=enable, reset=load, a=count0, b=count1, c=false, d=false, e=false, f=false, g=false);
+    Mux(a=storedData0, b=storedData1, sel=count0, out=mux1);
+    Mux(a=storedData2, b=storedData3, sel=count0, out=mux2);
+    Mux(a=mux1, b=mux2, sel=count1, out=sout);
     And(a=count0, b=count1, out=done);
     And(a=done, b=enable, out=complete);
-}  
+}
