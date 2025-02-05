@@ -1,6 +1,3 @@
-​
-
-
 CHIP P2S {
     IN indata[4], enable, load;
     OUT sout, complete;
