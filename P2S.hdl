@@ -3,11 +3,7 @@ CHIP P2S {
     OUT sout, complete;
 
     PARTS:
-    Register(in[0..3]=indata, load=load, out[0..3]=storedData);
-    Or(a=storedData[0], b=false, out=storedData0);
-    Or(a=storedData[1], b=false, out=storedData1);
-    Or(a=storedData[2], b=false, out=storedData2);
-    Or(a=storedData[3], b=false, out=storedData3);
+    Register(in[0..3]=indata, load=load, out=storedData,out[0]=storedData0,out[1]=storedData1,out[2]=storedData2,out[3]=storedData3);
     Counter(inc=enable, reset=load, a=count0, b=count1, c=false, d=false, e=false, f=false, g=false);
     Mux(a=storedData0, b=storedData1, sel=count0, out=mux1);
     Mux(a=storedData2, b=storedData3, sel=count0, out=mux2);
