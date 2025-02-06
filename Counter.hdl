@@ -1,11 +1,10 @@
 CHIP Counter {
     IN inc, reset;
-    OUT a,b,c,d,e,f,g;
+    OUT out1, out2;
 
     PARTS:
-    Register(in=nextCount, load=true, out=currentCount,out[0]=mD,out[1]=mC,out[2]=mB,out[3]=mA);
+    Register(in=nextCount, load=true, out=currentCount,out[0]=out1,out[1]=out2);
     Inc16(in=currentCount, out=incrementedCount);
     Mux16(a=currentCount, b=incrementedCount, sel=inc, out=newCount);
     Mux16(a=newCount, b=false, sel=reset, out=nextCount);
-    Decoder(A=mA, B=mB, C=mC, D=mD, a=a, b=b, c=c, d=d, e=e, f=f, g=g);
 }
