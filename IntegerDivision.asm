@@ -10,12 +10,12 @@ M=0
 
 @R0
 D=M
-@NEG_X
+@X_NEG
 D;JLT
 
 @R1
 D=M
-@NEG_Y
+@Y_NEG
 D;JLT
 
 (DIV_LOOP)
@@ -33,7 +33,7 @@ M=M+1
 @DIV_LOOP
 0;JMP
 
-(NEG_X)
+(X_NEG)
 @R0
 D=-M
 @R0
@@ -42,16 +42,16 @@ M=D
 M=0
 @R3
 M=0
-@NEG_Y_CHECK
+@Y_NEG_CHECK
 0;JMP
 
-(NEG_Y)
+(Y_NEG)
 @R1
 D=-M
 @R1
 M=D
 
-(NEG_Y_CHECK)
+(Y_NEG_CHECK)
 @R0
 D=M
 @NEG_QUOTIENT
@@ -66,10 +66,17 @@ M=-M
 
 @R0
 D=M
+@POS_REM
+D;JGE
+@R3
+M=-M
+(POS_REM)
+
+@R0
+D=M
 @R3
 M=D
 
-(END_DIV)
 @R4
 M=0
 @END
