@@ -1,51 +1,49 @@
-@R0
-D=M  
 @R1
-D=M-D  
+D=M
 @DIV_INVALID
-D;JEQ  
+D;JEQ
 
 @R2
-M=0  
+M=0
 @R3
-M=0  
+M=0
 
 @R0
 D=M
 @NEG_X
-D;JLT  
+D;JLT
 
 @R1
 D=M
 @NEG_Y
-D;JLT  
+D;JLT
 
 (DIV_LOOP)
 @R0
 D=M
 @R1
-D=D-M  
+D=D-M
 @END_DIV
-D;JLT 
+D;JLT
 
 @R0
-M=D  
+M=D
 @R2
-M=M+1 
+M=M+1
 @DIV_LOOP
-0;JMP 
+0;JMP
 
 (NEG_X)
 @R0
-D=-M 
+D=-M
 @R0
 M=D
 @NEG_Y_CHECK
-0;JMP  
+0;JMP
 
 (NEG_Y)
 @R1
-D=-M  
+D=-M
 @R1
 M=D
 
@@ -55,27 +53,27 @@ D=M
 @R2
 D=M
 @NEG_QUOTIENT
-D;JLT 
+D;JLT
 
 @END_DIV
-0;JMP  
+0;JMP
 
 (NEG_QUOTIENT)
 @R2
-M=-M 
+M=-M
 
 (END_DIV)
 @R0
-M=D 
+M=D
 
 @R4
-M=0  
+M=0
 @END
-0;JMP 
+0;JMP
 
 (DIV_INVALID)
 @R4
-M=1  
+M=1
 @END
 0;JMP
 
