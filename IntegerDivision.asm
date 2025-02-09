@@ -38,6 +38,10 @@ M=M+1
 D=-M
 @R0
 M=D
+@R2
+M=0
+@R3
+M=0
 @NEG_Y_CHECK
 0;JMP
 
@@ -50,8 +54,6 @@ M=D
 (NEG_Y_CHECK)
 @R0
 D=M
-@R2
-D=M
 @NEG_QUOTIENT
 D;JLT
 
@@ -61,9 +63,11 @@ D;JLT
 (NEG_QUOTIENT)
 @R2
 M=-M
+@R3
+M=-M
 
 (END_DIV)
-@R0
+@R3
 M=D
 
 @R4
