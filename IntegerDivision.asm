@@ -63,13 +63,13 @@ D;JLT
 (NEG_QUOTIENT)
 @R2
 M=-M
-@R3
-M=-M
 
-(END_DIV)
+@R0
+D=M
 @R3
 M=D
 
+(END_DIV)
 @R4
 M=0
 @END
