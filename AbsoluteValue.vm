@@ -1,24 +1,22 @@
 // AbsoluteValue.vm
+
+push argument 0 
+
+dup 
+
+if-goto NEGATIVE
+
+goto STORE_RESULT
+
+NEGATIVE:
+neg 
+
+STORE_RESULT:
+pop argument 1 
+
 push argument 0
-push constant 32768
-eq
-if-goto CANT
-push argument 0
-push constant 0
 lt
-if-goto NEG
-goto POS
-label NEG
-push argument 0
-neg
-pop argument 2
-goto END
-label POS
-push argument 0
-pop argument 2
-goto END
-label CANT
-push argument 0
-pop argument 2
-label END
-push argument 2
+pop argument 2 
+
+push constant 0
+pop argument 3 
