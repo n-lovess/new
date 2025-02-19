@@ -1,4 +1,4 @@
-function Xor.xor 0
+// Xor.vm 
 push argument 0
 push argument 1
 or
@@ -9,4 +9,3 @@ not
 and
 pop argument 2
 push argument 2
-return
