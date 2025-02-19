@@ -1,6 +1,11 @@
 function Xor 0
 push argument 0
 push argument 1
-xor
+eq
+push argument 0
+push argument 1
+or
+not
+and
 pop argument 2
 return
