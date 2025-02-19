@@ -1,0 +1,49 @@
+function AbsoluteValue 0
+
+  push argument 0
+  push constant 32768   
+  eq                    
+  if-goto CANT_COMPUTE
+
+  push argument 0
+  push constant 0
+  lt              
+  if-goto NEGATIVE
+  goto NOT_NEGATIVE
+
+(NEGATIVE)
+  push argument 0
+  neg              
+  pop argument 1       
+
+  push constant 1
+  pop argument 2
+
+  push constant 0
+  pop argument 3
+  goto END
+
+(NOT_NEGATIVE)
+  push argument 0
+  pop argument 1      
+
+  push constant 0
+  pop argument 2
+
+  push constant 0
+  pop argument 3
+  goto END
+
+(CANT_COMPUTE)
+  push argument 0
+  pop argument 1
+
+  push constant 1
+  pop argument 2
+
+  push constant 1
+  pop argument 3
+  goto END
+
+(END)
+  return
