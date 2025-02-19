@@ -1,19 +1,24 @@
 // AbsoluteValue.vm
 push argument 0
+push constant 32768
+eq
+if-goto CANT
+push argument 0
 push constant 0
 lt
-pop temp 0
+if-goto NEG
+goto POS
+label NEG
 push argument 0
-push temp 0
-or
-push argument 0
-push temp 0
-and
-not
-and
-pop temp 1
-push temp 1
-push temp 0
-sub
+neg
 pop argument 2
+goto END
+label POS
+push argument 0
+pop argument 2
+goto END
+label CANT
+push argument 0
+pop argument 2
+label END
 push argument 2
