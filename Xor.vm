@@ -1,23 +1,12 @@
-function Xor 3
+function Xor.xor 0
 push argument 0
-pop local 0
 push argument 1
-pop local 1
-
-push local 0
-push local 1
 or
-
-push local 0
-push local 1
+push argument 0
+push argument 1
 and
 not
-
 and
-pop local 2
-
-push local 2
 pop argument 2
-
-push local 2
+push argument 2
 return
