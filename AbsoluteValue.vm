@@ -1,35 +1,36 @@
 // AbsoluteValue.vm
-
-push argument 0 
-
 push argument 0
-
+push constant 32767
+push constant 1
+add
+eq
+if-goto FAIL
+push argument 0
 push constant 0
 lt
-if-goto NEGATIVE
-
+if-goto NEG
 push argument 0
 pop argument 1
-
 push constant 0
 pop argument 2
-
 push constant 0
 pop argument 3
-
 goto END
-
-NEGATIVE:
+label NEG
 push argument 0
 neg
 pop argument 1
-
 push constant 1
 pop argument 2
-
 push constant 0
 pop argument 3
-
-END:
-label END
 goto END
+label FAIL
+push argument 0
+pop argument 1
+push constant 1
+pop argument 2
+push constant 1
+pop argument 3
+label END
+push argument 1
