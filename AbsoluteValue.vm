@@ -1,42 +1,30 @@
-function AbsoluteValue 0
-push argument 0
-push constant 0
-eq
-not
-push argument 0
-push argument 0
-neg
-eq
-and
-if-goto CANT
+// AbsoluteValue.vm
 push argument 0
 push constant 0
 lt
-if-goto NEG
-goto NOTNEG
-label NEG
-push argument 0
-neg
-pop argument 1
-push constant 1
-pop argument 2
 push constant 0
-pop argument 3
-goto END
-label NOTNEG
-push argument 0
-pop argument 1
-push constant 0
+eq
+not
 pop argument 2
-push constant 0
-pop argument 3
-goto END
-label CANT
 push argument 0
+push argument 0
+push constant 0
+lt
+push argument 0
+push argument 0
+push constant 0
+lt
+or
+push argument 0
+push argument 0
+push constant 0
+lt
+and
+not
+and
+push argument 0
+push constant 0
+lt
+sub
 pop argument 1
-push constant 1
-pop argument 2
-push constant 1
-pop argument 3
-label END
-return
+push argument 1
