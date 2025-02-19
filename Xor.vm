@@ -1,0 +1,6 @@
+function Xor 0
+push argument 0
+push argument 1
+xor
+pop argument 2
+return
