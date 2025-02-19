@@ -1,10 +1,10 @@
 function Xor 0
 push argument 0
 push argument 1
-eq
+or
 push argument 0
 push argument 1
-or
+and
 not
 and
 pop argument 2
