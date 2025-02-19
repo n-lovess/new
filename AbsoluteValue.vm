@@ -2,18 +2,21 @@
 push argument 0
 push constant 0
 lt
-pop temp 0
+pop argument 3
+push argument 3
+push constant -1
+eq
+neg
+pop argument 1
 push argument 0
-push temp 0
+push argument 3
 or
 push argument 0
-push temp 0
+push argument 3
 and
 not
 and
-pop temp 1
-push temp 1
-push temp 0
+push argument 3
 sub
 pop argument 2
 push argument 2
