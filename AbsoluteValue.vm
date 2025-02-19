@@ -2,21 +2,34 @@
 
 push argument 0 
 
-dup 
-
-if-goto NEGATIVE
-
-goto STORE_RESULT
-
-NEGATIVE:
-neg 
-
-STORE_RESULT:
-pop argument 1 
-
 push argument 0
-lt
-pop argument 2 
 
 push constant 0
-pop argument 3 
+lt
+if-goto NEGATIVE
+
+push argument 0
+pop argument 1
+
+push constant 0
+pop argument 2
+
+push constant 0
+pop argument 3
+
+goto END
+
+NEGATIVE:
+push argument 0
+neg
+pop argument 1
+
+push constant 1
+pop argument 2
+
+push constant 0
+pop argument 3
+
+END:
+label END
+goto END
