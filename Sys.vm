@@ -1,5 +1,9 @@
 // Sys.vm 
 function Sys.init 0
+push RAM[256]
+push RAM[257]
+call Sys.range 2
+pop RAM[256]
 return
 function Sys.min 0
 pop local 1
