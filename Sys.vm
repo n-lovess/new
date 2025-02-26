@@ -1,6 +1,3 @@
-function Sys.init 0
-return
-
 function Sys.min 0
 push argument 0
 push argument 1
@@ -23,54 +20,60 @@ label MAX
 push argument 0
 return
 
-function Sys.range 2
+function Sys.range 3
 push argument 1
 push constant 0
 eq
-if-goto EMPTY
+if-goto RANGE_EMPTY
 push argument 0
+push constant 0
+add
 pop pointer 1
 push that 0
 pop local 0
 push that 0
 pop local 1
-push argument 1
 push constant 1
-sub
-pop argument 1
-push argument 0
-push constant 1
-add
-pop argument 0
-label LOOP
+pop local 2
+label LOOP_START
+push local 2
 push argument 1
-push constant 0
 eq
-if-goto DONE
+if-goto LOOP_END
 push argument 0
+push local 2
+add
 pop pointer 1
+push that 0
+pop temp 0
+push temp 0
 push local 0
-push that 0
-call Sys.min 2
+lt
+if-goto UPDATE_MIN
+goto SKIP_MIN_UPDATE
+label UPDATE_MIN
+push temp 0
 pop local 0
+label SKIP_MIN_UPDATE
+push temp 0
 push local 1
-push that 0
-call Sys.max 2
+gt
+if-goto UPDATE_MAX
+goto SKIP_MAX_UPDATE
+label UPDATE_MAX
+push temp 0
 pop local 1
-push argument 1
-push constant 1
-sub
-pop argument 1
-push argument 0
+label SKIP_MAX_UPDATE
+push local 2
 push constant 1
 add
-pop argument 0
-goto LOOP
-label DONE
+pop local 2
+goto LOOP_START
+label LOOP_END
 push local 1
 push local 0
 sub
 return
-label EMPTY
+label RANGE_EMPTY
 push constant 0
 return
