@@ -2,10 +2,10 @@ function Sys.min 0
 push argument 0
 push argument 1
 lt
-if-goto MIN_ARG0
+if-goto MIN
 push argument 1
 return
-label MIN_ARG0
+label MIN
 push argument 0
 return
 
@@ -13,10 +13,10 @@ function Sys.max 0
 push argument 0
 push argument 1
 gt
-if-goto MAX_ARG0
+if-goto MAX
 push argument 1
 return
-label MAX_ARG0
+label MAX
 push argument 0
 return
 
@@ -24,7 +24,7 @@ function Sys.range 2
 push argument 1
 push constant 0
 eq
-if-goto ZERO
+if-goto EMPTY
 push argument 0
 pop pointer 1
 push that 0
@@ -68,6 +68,6 @@ push local 1
 push local 0
 sub
 return
-label ZERO
+label EMPTY
 push constant 0
 return
