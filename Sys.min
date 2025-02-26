@@ -1,0 +1,10 @@
+function Sys.min 0
+push argument 0
+push argument 1
+lt
+if-goto MIN_ARG0
+push argument 1
+return
+label MIN_ARG0
+push argument 0
+return
