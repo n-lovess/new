@@ -1,7 +1,4 @@
 // Sys.vm
-function Sys.init 0
-return
-function Sys.min 0
 pop local 1
 pop local 0
 push local 0
@@ -14,7 +11,6 @@ label MIN_X
 push local 0
 label END_MIN
 return
-function Sys.max 0
 pop local 1
 pop local 0
 push local 0
@@ -27,7 +23,6 @@ label MAX_X
 push local 0
 label END_MAX
 return
-function Sys.range 4
 push argument 0
 pop pointer 1
 push that 0
@@ -65,5 +60,3 @@ goto LOOP_START
 label LOOP_END
 push local 1
 push local 0
-sub
-return
