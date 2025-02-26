@@ -8,6 +8,8 @@ goto Sys.min.end
 label Sys.min.true
 push argument 0
 label Sys.min.end
+pop argument 2
+push argument 2
 
 label Sys.max
 push argument 0
@@ -19,6 +21,8 @@ goto Sys.max.end
 label Sys.max.true
 push argument 0
 label Sys.max.end
+pop argument 2
+push argument 2
 
 label Sys.range
 push argument 1
@@ -71,7 +75,11 @@ label Sys.range.done
 push local 1
 push local 0
 sub
+pop argument 2
+push argument 2
 goto Sys.range.end
 label Sys.range.empty
 push constant 0
+pop argument 2
+push argument 2
 label Sys.range.end
