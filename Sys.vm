@@ -1,0 +1,73 @@
+function Sys.min 0
+push argument 0
+push argument 1
+lt
+if-goto MIN_ARG0
+push argument 1
+return
+label MIN_ARG0
+push argument 0
+return
+
+function Sys.max 0
+push argument 0
+push argument 1
+gt
+if-goto MAX_ARG0
+push argument 1
+return
+label MAX_ARG0
+push argument 0
+return
+
+function Sys.range 2
+push argument 1
+push constant 0
+eq
+if-goto ZERO
+push argument 0
+pop pointer 1
+push that 0
+pop local 0
+push that 0
+pop local 1
+push argument 1
+push constant 1
+sub
+pop argument 1
+push argument 0
+push constant 1
+add
+pop argument 0
+label LOOP
+push argument 1
+push constant 0
+eq
+if-goto DONE
+push argument 0
+pop pointer 1
+push local 0
+push that 0
+call Sys.min 2
+pop local 0
+push local 1
+push that 0
+call Sys.max 2
+pop local 1
+push argument 1
+push constant 1
+sub
+pop argument 1
+push argument 0
+push constant 1
+add
+pop argument 0
+goto LOOP
+label DONE
+push local 1
+push local 0
+sub
+return
+label ZERO
+push constant 0
+return
