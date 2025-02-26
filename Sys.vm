@@ -12,7 +12,6 @@ label MIN_TRUE
 label MIN_END
     return
 
-function Sys.max 0
     push argument 0
     push argument 1
     gt
@@ -28,10 +27,10 @@ function Sys.range 2
     push argument 0
     pop pointer 0
 
-    push that 0
-    pop local 0 
-    push that 0
-    pop local 1 
+    push this 0
+    pop local 0   
+    push this 0
+    pop local 1   
 
     push argument 1
     push constant 1
@@ -49,7 +48,7 @@ label LOOP
     add
     pop pointer 0
 
-    push that 0
+    push this 0
     pop temp 0
 
     push local 0
