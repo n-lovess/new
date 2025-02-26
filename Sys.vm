@@ -1,77 +1,69 @@
 // Sys.vm
-  pop local 1  
-  pop local 0   
-  push local 0  
-  push local 1  
-  lt            
-  if-goto MIN_X
-  push local 1
-  goto END_MIN
+function Sys.init 0
+return
+function Sys.min 0
+pop local 1
+pop local 0
+push local 0
+push local 1
+lt
+if-goto MIN_X
+push local 1
+goto END_MIN
 label MIN_X
-  push local 0
+push local 0
 label END_MIN
-  return
-
+return
 function Sys.max 0
-  pop local 1  
-  pop local 0   
-  push local 0  
-  push local 1  
-  gt            
-  if-goto MAX_X
-  push local 1
-  goto END_MAX
+pop local 1
+pop local 0
+push local 0
+push local 1
+gt
+if-goto MAX_X
+push local 1
+goto END_MAX
 label MAX_X
-  push local 0
+push local 0
 label END_MAX
-  return
-
+return
 function Sys.range 4
-  push argument 0
-  pop pointer 1
-
-  push that 0
-  pop local 0   
-  push that 0
-  pop local 1  
-
-  push constant 1
-  pop local 2  
-
+push argument 0
+pop pointer 1
+push that 0
+pop local 0
+push that 0
+pop local 1
+push constant 1
+pop local 2
 label LOOP_START
-  push local 2
-  push argument 1
-  lt         
-  if-goto LOOP_BODY
-  goto LOOP_END
-
+push local 2
+push argument 1
+lt
+if-goto LOOP_BODY
+goto LOOP_END
 label LOOP_BODY
-  push argument 0
-  push local 2
-  add
-  pop pointer 1  
-
-  push that 0
-  pop local 3   
-
-  push local 0
-  push local 3
-  call Sys.min 2
-  pop local 0
-
-  push local 1
-  push local 3
-  call Sys.max 2
-  pop local 1
-
-  push local 2
-  push constant 1
-  add
-  pop local 2
-
-  goto LOOP_START
-
+push argument 0
+push local 2
+add
+pop pointer 1
+push that 0
+pop local 3
+push local 0
+push local 3
+call Sys.min 2
+pop local 0
+push local 1
+push local 3
+call Sys.max 2
+pop local 1
+push local 2
+push constant 1
+add
+pop local 2
+goto LOOP_START
 label LOOP_END
-  push local 1
-  push local 0
-  sub
+push local 1
+push local 0
+sub
+return
