@@ -1,80 +1,79 @@
 // Sys.vm
 
-// Compute the minimum of two values
 function Sys.min 0
     push argument 0
     push argument 1
     lt
-    if-goto MIN_A
+    if-goto MIN_TRUE
     push argument 1
-    goto END_MIN
-label MIN_A
+    goto MIN_END
+label MIN_TRUE
     push argument 0
-label END_MIN
+label MIN_END
     return
 
-// Compute the maximum of two values
 function Sys.max 0
     push argument 0
     push argument 1
     gt
-    if-goto MAX_A
+    if-goto MAX_TRUE
     push argument 1
-    goto END_MAX
-label MAX_A
+    goto MAX_END
+label MAX_TRUE
     push argument 0
-label END_MAX
+label MAX_END
     return
 
-// Compute the range of an array
 function Sys.range 2
-    push argument 0   // Address of first element
-    pop pointer 0     // Set THIS to point to the array
-    push argument 1   // Number of elements
-    pop local 0       // Store count in local 0
+    push argument 0
+    pop pointer 0
 
-    push constant 32767  // Initialize min to a large number
-    pop local 1
-    push constant -32768 // Initialize max to a small number
-    pop local 2
-    push constant 0      // Initialize loop counter
-    pop local 3
+    push that 0
+    pop local 0 
+    push that 0
+    pop local 1 
+
+    push argument 1
+    push constant 1
+    sub
+    pop argument 1
 
 label LOOP
-    push local 3
-    push local 0
+    push argument 1
+    push constant 0
     eq
     if-goto END_LOOP
 
     push pointer 0
-    push local 3
-    add
-    pop pointer 1
-    push that 0
-
-    push local 1
-    call Sys.min 2
-    pop local 1
-
-    push local 2
-    push that 0
-    call Sys.max 2
-    pop local 2
-
-    push local 3
     push constant 1
     add
-    pop local 3
-    goto LOOP
+    pop pointer 0
 
-label END_LOOP
-    push local 2
+    push that 0
+    pop temp 0
+
+    push local 0
+    push temp 0
+    call Sys.min 2
+    pop local 0
+
     push local 1
+    push temp 0
+    call Sys.max 2
+    pop local 1
+
+    push argument 1
+    push constant 1
     sub
-    call AbsoluteValue 1 // Ensure positive range
+    pop argument 1
+
+    goto LOOP
+label END_LOOP
+    push local 1
+    push local 0
+    sub
     return
 
-// Entry point
 function Sys.init 0
     call Sys.range 2
 label WHILE
