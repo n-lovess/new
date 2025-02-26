@@ -1,26 +1,26 @@
-// Sys.min
+label Sys.min
 push argument 0
 push argument 1
 lt
 if-goto Sys.min.true
 push argument 1
 goto Sys.min.end
-// Sys.min.true
+label Sys.min.true
 push argument 0
-// Sys.min.end
+label Sys.min.end
 
-// Sys.max
+label Sys.max
 push argument 0
 push argument 1
 gt
 if-goto Sys.max.true
 push argument 1
 goto Sys.max.end
-// Sys.max.true
+label Sys.max.true
 push argument 0
-// Sys.max.end
+label Sys.max.end
 
-// Sys.range
+label Sys.range
 push argument 1
 push constant 0
 eq
@@ -33,7 +33,7 @@ push that 0
 pop local 1
 push constant 1
 pop local 2
-// Sys.range.loop
+label Sys.range.loop
 push local 2
 push argument 1
 eq
@@ -49,29 +49,29 @@ push local 0
 lt
 if-goto Sys.range.updatemin
 goto Sys.range.skipmin
-// Sys.range.updatemin
+label Sys.range.updatemin
 push temp 0
 pop local 0
-// Sys.range.skipmin
+label Sys.range.skipmin
 push temp 0
 push local 1
 gt
 if-goto Sys.range.updatemax
 goto Sys.range.skipmax
-// Sys.range.updatemax
+label Sys.range.updatemax
 push temp 0
 pop local 1
-// Sys.range.skipmax
+label Sys.range.skipmax
 push local 2
 push constant 1
 add
 pop local 2
 goto Sys.range.loop
-// Sys.range.done
+label Sys.range.done
 push local 1
 push local 0
 sub
 goto Sys.range.end
-// Sys.range.empty
+label Sys.range.empty
 push constant 0
-// Sys.range.end
+label Sys.range.end
