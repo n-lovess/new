@@ -1,33 +1,31 @@
-function Sys.min 0
+// Sys.min
 push argument 0
 push argument 1
 lt
-if-goto MIN
+if-goto Sys.min.true
 push argument 1
-return
-label MIN
+goto Sys.min.end
+// Sys.min.true
 push argument 0
-return
+// Sys.min.end
 
-function Sys.max 0
+// Sys.max
 push argument 0
 push argument 1
 gt
-if-goto MAX
+if-goto Sys.max.true
 push argument 1
-return
-label MAX
+goto Sys.max.end
+// Sys.max.true
 push argument 0
-return
+// Sys.max.end
 
-function Sys.range 3
+// Sys.range
 push argument 1
 push constant 0
 eq
-if-goto RANGE_EMPTY
+if-goto Sys.range.empty
 push argument 0
-push constant 0
-add
 pop pointer 1
 push that 0
 pop local 0
@@ -35,11 +33,11 @@ push that 0
 pop local 1
 push constant 1
 pop local 2
-label LOOP_START
+// Sys.range.loop
 push local 2
 push argument 1
 eq
-if-goto LOOP_END
+if-goto Sys.range.done
 push argument 0
 push local 2
 add
@@ -49,31 +47,31 @@ pop temp 0
 push temp 0
 push local 0
 lt
-if-goto UPDATE_MIN
-goto SKIP_MIN_UPDATE
-label UPDATE_MIN
+if-goto Sys.range.updatemin
+goto Sys.range.skipmin
+// Sys.range.updatemin
 push temp 0
 pop local 0
-label SKIP_MIN_UPDATE
+// Sys.range.skipmin
 push temp 0
 push local 1
 gt
-if-goto UPDATE_MAX
-goto SKIP_MAX_UPDATE
-label UPDATE_MAX
+if-goto Sys.range.updatemax
+goto Sys.range.skipmax
+// Sys.range.updatemax
 push temp 0
 pop local 1
-label SKIP_MAX_UPDATE
+// Sys.range.skipmax
 push local 2
 push constant 1
 add
 pop local 2
-goto LOOP_START
-label LOOP_END
+goto Sys.range.loop
+// Sys.range.done
 push local 1
 push local 0
 sub
-return
-label RANGE_EMPTY
+goto Sys.range.end
+// Sys.range.empty
 push constant 0
-return
+// Sys.range.end
