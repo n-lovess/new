@@ -1,73 +1,81 @@
-// Sys.vm 
-function Sys.init 0
-push RAM[256]
-push RAM[257]
-call Sys.range 2
-pop RAM[256]
-return
+// Sys.vm
+
+// Compute the minimum of two values
 function Sys.min 0
-pop local 1
-pop local 0
-push local 0
-push local 1
-lt
-if-goto MIN_X
-push local 1
-goto END_MIN
-label MIN_X
-push local 0
+    push argument 0
+    push argument 1
+    lt
+    if-goto MIN_A
+    push argument 1
+    goto END_MIN
+label MIN_A
+    push argument 0
 label END_MIN
-return
+    return
+
+// Compute the maximum of two values
 function Sys.max 0
-pop local 1
-pop local 0
-push local 0
-push local 1
-gt
-if-goto MAX_X
-push local 1
-goto END_MAX
-label MAX_X
-push local 0
+    push argument 0
+    push argument 1
+    gt
+    if-goto MAX_A
+    push argument 1
+    goto END_MAX
+label MAX_A
+    push argument 0
 label END_MAX
-return
-function Sys.range 4
-push argument 0
-pop pointer 1
-push that 0
-pop local 0
-push that 0
-pop local 1
-push constant 1
-pop local 2
-label LOOP_START
-push local 2
-push argument 1
-lt
-if-goto LOOP_BODY
-goto LOOP_END
-label LOOP_BODY
-push argument 0
-push local 2
-add
-pop pointer 1
-push that 0
-pop local 3
-push local 0
-push local 3
-call Sys.min 2
-pop local 0
-push local 1
-push local 3
-call Sys.max 2
-pop local 1
-push local 2
-push constant 1
-add
-pop local 2
-goto LOOP_START
-label LOOP_END
-push local 1
-push local 0
-sub
-return
+    return
+
+// Compute the range of an array
+function Sys.range 2
+    push argument 0   // Address of first element
+    pop pointer 0     // Set THIS to point to the array
+    push argument 1   // Number of elements
+    pop local 0       // Store count in local 0
+
+    push constant 32767  // Initialize min to a large number
+    pop local 1
+    push constant -32768 // Initialize max to a small number
+    pop local 2
+    push constant 0      // Initialize loop counter
+    pop local 3
+
+label LOOP
+    push local 3
+    push local 0
+    eq
+    if-goto END_LOOP
+
+    push pointer 0
+    push local 3
+    add
+    pop pointer 1
+    push that 0
+
+    push local 1
+    call Sys.min 2
+    pop local 1
+
+    push local 2
+    push that 0
+    call Sys.max 2
+    pop local 2
+
+    push local 3
+    push constant 1
+    add
+    pop local 3
+    goto LOOP
+
+label END_LOOP
+    push local 2
+    push local 1
+    sub
+    call AbsoluteValue 1 // Ensure positive range
+    return
+
+// Entry point
+function Sys.init 0
+    call Sys.range 2
+label WHILE
+    goto WHILE
