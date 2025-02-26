@@ -2,12 +2,12 @@ label Sys.min
 push argument 0
 push argument 1
 lt
-if-goto Sys.min.true
+if-goto MIN
 push argument 1
-goto Sys.min.end
-label Sys.min.true
+goto MIN_END
+label MIN
 push argument 0
-label Sys.min.end
+label MIN_END
 pop argument 2
 push argument 2
 
@@ -15,12 +15,12 @@ label Sys.max
 push argument 0
 push argument 1
 gt
-if-goto Sys.max.true
+if-goto MAX
 push argument 1
-goto Sys.max.end
-label Sys.max.true
+goto MAX_END
+label MAX
 push argument 0
-label Sys.max.end
+label MAX_END
 pop argument 2
 push argument 2
 
@@ -28,58 +28,58 @@ label Sys.range
 push argument 1
 push constant 0
 eq
-if-goto Sys.range.empty
+if-goto EMPTY
 push argument 0
-pop pointer 1
-push that 0
-pop local 0
-push that 0
-pop local 1
-push constant 1
-pop local 2
-label Sys.range.loop
-push local 2
-push argument 1
-eq
-if-goto Sys.range.done
-push argument 0
-push local 2
-add
 pop pointer 1
 push that 0
 pop temp 0
+push that 0
+pop temp 1
+push constant 1
+pop temp 2
+label LOOP
+push temp 2
+push argument 1
+eq
+if-goto DONE
+push argument 0
+push temp 2
+add
+pop pointer 1
+push that 0
+pop temp 3
+push temp 3
 push temp 0
-push local 0
 lt
-if-goto Sys.range.updatemin
-goto Sys.range.skipmin
-label Sys.range.updatemin
-push temp 0
-pop local 0
-label Sys.range.skipmin
-push temp 0
-push local 1
+if-goto UPDATE_MIN
+goto SKIP_MIN
+label UPDATE_MIN
+push temp 3
+pop temp 0
+label SKIP_MIN
+push temp 3
+push temp 1
 gt
-if-goto Sys.range.updatemax
-goto Sys.range.skipmax
-label Sys.range.updatemax
-push temp 0
-pop local 1
-label Sys.range.skipmax
-push local 2
+if-goto UPDATE_MAX
+goto SKIP_MAX
+label UPDATE_MAX
+push temp 3
+pop temp 1
+label SKIP_MAX
+push temp 2
 push constant 1
 add
-pop local 2
-goto Sys.range.loop
-label Sys.range.done
-push local 1
-push local 0
+pop temp 2
+goto LOOP
+label DONE
+push temp 1
+push temp 0
 sub
 pop argument 2
 push argument 2
-goto Sys.range.end
-label Sys.range.empty
+goto RANGE_END
+label EMPTY
 push constant 0
 pop argument 2
 push argument 2
-label Sys.range.end
+label RANGE_END
