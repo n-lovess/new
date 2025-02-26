@@ -1,85 +1,81 @@
-label Sys.min
-push argument 0
-push argument 1
-lt
-if-goto MIN
-push argument 1
-goto MIN_END
-label MIN
-push argument 0
-label MIN_END
-pop argument 2
-push argument 2
+function Sys.init 0
+  return
 
-label Sys.max
-push argument 0
-push argument 1
-gt
-if-goto MAX
-push argument 1
-goto MAX_END
-label MAX
-push argument 0
-label MAX_END
-pop argument 2
-push argument 2
+function Sys.min 0
+  pop local 1   
+  pop local 0   
+  push local 0  
+  push local 1  
+  lt            
+  if-goto MIN_X
+  push local 1
+  goto END_MIN
+label MIN_X
+  push local 0
+label END_MIN
+  return
 
-label Sys.range
-push argument 1
-push constant 0
-eq
-if-goto EMPTY
-push argument 0
-pop pointer 1
-push that 0
-pop temp 0
-push that 0
-pop temp 1
-push constant 1
-pop temp 2
-label LOOP
-push temp 2
-push argument 1
-eq
-if-goto DONE
-push argument 0
-push temp 2
-add
-pop pointer 1
-push that 0
-pop temp 3
-push temp 3
-push temp 0
-lt
-if-goto UPDATE_MIN
-goto SKIP_MIN
-label UPDATE_MIN
-push temp 3
-pop temp 0
-label SKIP_MIN
-push temp 3
-push temp 1
-gt
-if-goto UPDATE_MAX
-goto SKIP_MAX
-label UPDATE_MAX
-push temp 3
-pop temp 1
-label SKIP_MAX
-push temp 2
-push constant 1
-add
-pop temp 2
-goto LOOP
-label DONE
-push temp 1
-push temp 0
-sub
-pop argument 2
-push argument 2
-goto RANGE_END
-label EMPTY
-push constant 0
-pop argument 2
-push argument 2
-label RANGE_END
+function Sys.max 0
+  pop local 1   
+  pop local 0   
+  push local 0  
+  push local 1  
+  gt        
+  if-goto MAX_X
+  push local 1
+  goto END_MAX
+label MAX_X
+  push local 0
+label END_MAX
+  return
+
+function Sys.range 4
+  push argument 0
+  pop pointer 1
+
+  push that 0
+  pop local 0   
+  push that 0
+  pop local 1 
+
+  push constant 1
+  pop local 2
+
+label LOOP_START
+  push local 2
+  push argument 1
+  lt            
+  if-goto LOOP_BODY
+  goto LOOP_END
+
+label LOOP_BODY
+  push argument 0
+  push local 2
+  add
+  pop pointer 1 
+
+  push that 0
+  pop local 3 
+
+  push local 0
+  push local 3
+  call Sys.min 2
+  pop local 0
+
+  push local 1
+  push local 3
+  call Sys.max 2
+  pop local 1
+
+  push local 2
+  push constant 1
+  add
+  pop local 2
+
+  goto LOOP_START
+
+label LOOP_END
+  push local 1
+  push local 0
+  sub
+  return
