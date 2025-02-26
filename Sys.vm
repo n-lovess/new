@@ -3,7 +3,7 @@ function Sys.init 0
 
 function Sys.min 0
   pop local 1   
-  pop local 0   
+  pop local 0  
   push local 0  
   push local 1  
   lt            
@@ -18,9 +18,9 @@ label END_MIN
 function Sys.max 0
   pop local 1   
   pop local 0   
-  push local 0  
+  push local 0
   push local 1  
-  gt        
+  gt            
   if-goto MAX_X
   push local 1
   goto END_MAX
@@ -34,9 +34,9 @@ function Sys.range 4
   pop pointer 1
 
   push that 0
-  pop local 0   
+  pop local 0 
   push that 0
-  pop local 1 
+  pop local 1   
 
   push constant 1
   pop local 2
@@ -44,7 +44,7 @@ function Sys.range 4
 label LOOP_START
   push local 2
   push argument 1
-  lt            
+  lt         
   if-goto LOOP_BODY
   goto LOOP_END
 
@@ -55,7 +55,7 @@ label LOOP_BODY
   pop pointer 1 
 
   push that 0
-  pop local 3 
+  pop local 3  
 
   push local 0
   push local 3
