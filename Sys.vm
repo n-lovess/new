@@ -79,9 +79,9 @@ return
 
 function Sys.shiftLeft 2
 push argument 0
-pop local 0   
+pop local 0
 push argument 1
-pop local 1    
+pop local 1
 label SHIFT_LOOP
 push local 1
 push constant 0
@@ -89,7 +89,7 @@ eq
 if-goto SHIFT_END
 push local 0
 push local 0
-add         
+add
 pop local 0
 push local 1
 push constant 1
@@ -102,20 +102,20 @@ return
 
 function Sys.computeParity 1
 push constant 0
-pop temp 0    
+pop temp 0
 push constant 0
-pop temp 1    
+pop temp 1
 label PARITY_LOOP
 push temp 1
 push constant 15
 lt
-if-goto PARITY_CONTINUE
+if-goto PARITY_BODY
 goto PARITY_END
-label PARITY_CONTINUE
+label PARITY_BODY
 push constant 1
 push temp 1
 call Sys.shiftLeft 2
-pop temp 2 
+pop temp 2
 push argument 0
 push temp 2
 and
@@ -139,7 +139,7 @@ return
 function Sys.encode 0
 push argument 0
 call Sys.computeParity 1
-pop temp 0    
+pop temp 0
 push temp 0
 push constant 0
 eq
