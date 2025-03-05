@@ -1,106 +1,106 @@
 // Sys.vm
 function Sys.xor 0
-    pop temp 0
-    pop temp 1
-    push temp 1
-    push temp 0
-    not
-    and
-    pop temp 2
-    push temp 1
-    not
-    push temp 0
-    and
-    pop temp 3
-    push temp 2
-    push temp 3
-    or
-    return
+pop temp 0
+pop temp 1
+push temp 1
+push temp 0
+not
+and
+pop temp 2
+push temp 1
+not
+push temp 0
+and
+pop temp 3
+push temp 2
+push temp 3
+or
+return
 
 function Sys.shiftLeft 2
-    push argument 0
-    pop local 0
-    push argument 1
-    pop local 1
-label SHIFT_LOOP
-    push local 1
-    push constant 0
-    eq
-    if-goto SHIFT_END
-    push local 0
-    push local 0
-    add
-    pop local 0
-    push local 1
-    push constant 1
-    sub
-    pop local 1
-    goto SHIFT_LOOP
-label SHIFT_END
-    push local 0
-    return
+push argument 0
+pop local 0
+push argument 1
+pop local 1
+label SL_LOOP
+push local 1
+push constant 0
+eq
+if-goto SL_END
+push local 0
+push local 0
+add
+pop local 0
+push local 1
+push constant 1
+sub
+pop local 1
+goto SL_LOOP
+label SL_END
+push local 0
+return
 
 function Sys.computeParity 2
-    push argument 0
-    pop temp 0
-    push constant 0
-    pop local 0
-    push constant 0
-    pop local 1
+push argument 0
+pop temp 2
+push constant 0
+pop local 0
+push constant 0
+pop local 1
 label CP_LOOP
-    push local 1
-    push constant 15
-    lt
-    if-goto CP_BODY
-    goto CP_END
+push local 1
+push constant 15
+lt
+if-goto CP_BODY
+goto CP_END
 label CP_BODY
-    push constant 1
-    push local 1
-    call Sys.shiftLeft 2
-    pop temp 1
-    push temp 0
-    push temp 1
-    and
-    push constant 0
-    eq
-    if-goto CP_SKIP
-    push local 0
-    push constant 1
-    call Sys.xor 2
-    pop local 0
+push constant 1
+push local 1
+call Sys.shiftLeft 2
+pop temp 0
+push temp 2
+push temp 0
+and
+push constant 0
+eq
+if-goto CP_SKIP
+push local 0
+push constant 1
+call Sys.xor 2
+pop local 0
 label CP_SKIP
-    push local 1
-    push constant 1
-    add
-    pop local 1
-    goto CP_LOOP
+push local 1
+push constant 1
+add
+pop local 1
+goto CP_LOOP
 label CP_END
-    push local 0
-    return
+push local 0
+return
 
 function Sys.encode 0
-    push argument 0
-    pop temp 0
-    push temp 0
-    call Sys.computeParity 1
-    pop temp 1
-    push temp 0
-    push constant 32767
-    and
-    pop temp 0
-    push temp 1
-    push constant 0
-    eq
-    if-goto ENCODE_SKIP
-    push temp 0
-    push constant 32768
-    or
-    pop temp 0
-label ENCODE_SKIP
-    push temp 0
-    return
+push argument 0
+pop temp 0
+push temp 0
+call Sys.computeParity 1
+pop temp 1
+push temp 0
+push constant 32767
+and
+pop temp 0
+push temp 1
+push constant 0
+eq
+if-goto ENC_SKIP
+push temp 0
+push constant 32768
+or
+pop temp 0
+label ENC_SKIP
+push temp 0
+return
 
 function Sys.init 0
-    call Sys.encode 1
+call Sys.encode 1
 label WHILE
-    goto WHILE
+goto WHILE
