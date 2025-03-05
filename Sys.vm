@@ -9,7 +9,6 @@ label MIN_TRUE
 push argument 0
 label MIN_END
 return
-
 function Sys.max 0
 push argument 0
 push argument 1
@@ -21,7 +20,6 @@ label MAX_TRUE
 push argument 0
 label MAX_END
 return
-
 function Sys.range 2
 push argument 0
 pop pointer 0
@@ -64,7 +62,6 @@ push local 1
 push local 0
 sub
 return
-
 function Sys.xor 0
 push argument 0
 push argument 1
@@ -76,7 +73,6 @@ push argument 1
 and
 or
 return
-
 function Sys.shiftLeft 2
 push argument 0
 pop local 0
@@ -99,7 +95,6 @@ goto SHIFT_LOOP
 label SHIFT_END
 push local 0
 return
-
 function Sys.computeParity 1
 push constant 0
 pop temp 0
@@ -135,7 +130,6 @@ goto PARITY_LOOP
 label PARITY_END
 push temp 0
 return
-
 function Sys.encode 0
 push argument 0
 call Sys.computeParity 1
@@ -154,7 +148,6 @@ push constant 32767
 and
 label ENCODE_END
 return
-
 function Sys.init 0
 push constant 31
 call Sys.encode 1
