@@ -1,3 +1,4 @@
+// Sys.vm
 function Sys.xor 0
 pop temp 0
 pop temp 1
@@ -6,11 +7,13 @@ push temp 0
 not
 and
 pop temp 2
+push temp 0
 push temp 1
 not
-push temp 0
 and
+pop temp 3
 push temp 2
+push temp 3
 or
 return
 
@@ -88,12 +91,12 @@ pop temp 0
 push temp 1
 push constant 0
 eq
-if-goto SKIP_SET
+if-goto NO_SET
 push temp 0
 push constant 32768
 or
 pop temp 0
-label SKIP_SET
+label NO_SET
 push temp 0
 return
 
