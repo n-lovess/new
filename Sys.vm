@@ -20,7 +20,11 @@ push temp 5
 or
 return
 
-function Sys.shiftLeft 0
+function Sys.shiftLeft 2
+push constant 0
+pop local 0
+push constant 0
+pop local 1
 push argument 0
 pop temp 1
 push argument 1
@@ -43,7 +47,8 @@ label SHIFT_END
 push temp 1
 return
 
-function Sys.computeParity 0
+function Sys.computeParity 2
+push argument 0
 pop temp 2
 push constant 0
 pop temp 3
@@ -68,7 +73,7 @@ eq
 if-goto SKIP_XOR
 push temp 3
 push constant 1
-call Sys.xor 2
+call Sys.xor 0
 pop temp 3
 label SKIP_XOR
 push temp 4
@@ -102,4 +107,6 @@ push temp 0
 return
 
 function Sys.init 0
-return
+call Sys.encode 1
+label WHILE
+goto WHILE
