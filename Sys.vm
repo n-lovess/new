@@ -78,24 +78,26 @@ or
 return
 
 function Sys.shiftLeft 2
-push constant 0
-pop temp 0
-label SHIFT_LOOP
+push argument 0
+pop local 0
 push argument 1
+pop local 1
+label SHIFT_LOOP
+push local 1
 push constant 0
 eq
 if-goto SHIFT_END
-push argument 0
-push constant 2
-mul
-pop argument 0
-push argument 1
+push local 0
+push local 0
+add
+pop local 0
+push local 1
 push constant 1
 sub
-pop argument 1
+pop local 1
 goto SHIFT_LOOP
 label SHIFT_END
-push argument 0
+push local 0
 return
 
 function Sys.computeParity 1
