@@ -151,7 +151,6 @@ and
 label END_ENCODE
 return
 function Sys.init 0
-push constant 31
 call Sys.encode 1
 label WHILE
 goto WHILE
