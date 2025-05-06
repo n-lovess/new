@@ -19,7 +19,7 @@ M=D          // R1 = D; store the same value (it’s already positive)
 @END         // That’s it for the positives so I jump to the end
 0;JMP        // goto (END)
 
-(NEGATIVE)   // Label: handling the negative case now
+(NEGATIVE)   // Handling the negative case now
 @R2          // Mark that it was negative
 M=1          // R2 = 1; I spotted a negative input
 
@@ -56,4 +56,4 @@ D=M          // D = original input
 @R1          // I store it in R1 even though it’s still negative
 M=D          // R1 = D; that’s the best we can do
 
-(END)        // Label: all done, the program stops here
+(END)        // The program stops here
