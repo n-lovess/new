@@ -1,19 +1,23 @@
 import numpy as np
 
-def classical_gs(A):
+def gram_schmidt_qr(A):
+    n, m = A.shape
+    if n != m:
+        raise ValueError(f"the matrix A is not square, {A.shape=}")
 
-    a1 = A[:, 0]
-    a2 = A[:, 1]
+    Q = np.empty_like(A)
+    R = np.zeros_like(A)
 
-    q1 = a1 / np.linalg.norm(a1)
+    for j in range(n):
+        u = A[:, j].copy()
 
-    r12 = np.dot(q1, a2)
-    u2 = a2 - r12 * q1
+        for i in range(j):
+            R[i, j] = np.dot(Q[:, i], A[:, j])
+            u -= R[i, j] * Q[:, i]
 
-    q2 = u2 / np.linalg.norm(u2)
+        R[j, j] = np.linalg.norm(u)
+        Q[:, j] = u / R[j, j]
 
-    Q = np.column_stack((q1, q2))
-    R = Q.T @ A
     return Q, R
 
 def toupper(R):
@@ -24,8 +28,10 @@ eps_list = [1e-6, 1e-7, 1e-8, 1e-10, 1e-12, 1e-14, 1e-16]
 print(f"{'eps':>12}  {'error1':>12}  {'error2':>12}  {'error3':>12}")
 
 for eps in eps_list:
-    A = np.array([[1, 1 + eps], [1 + eps, 1]], dtype=float)
-    Q, R = classical_gs(A)
+    A = np.array([[1, 1 + eps],
+                  [1 + eps, 1]], dtype=float)
+
+    Q, R = gram_schmidt_qr(A)
 
     error1 = np.linalg.norm(A - Q @ R, 2)
     error2 = np.linalg.norm(Q.T @ Q - np.eye(2), 2)
