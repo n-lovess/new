@@ -1,0 +1,212 @@
+#!/usr/bin/env python3
+import argparse
+import os
+import socket
+import struct
+import sys
+from typing import Tuple
+
+#############
+# Constants #
+#############
+DEFAULT_PORT = 9090
+DEFAULT_IPV4_ADDRESS = '127.0.0.1'
+DEFAULT_IPV6_ADDRESS = '::1'
+DEFAULT_OUTDIR = './'
+BUFSIZE = 64 * 1024
+MAX_FILENAME_LEN = 4096
+
+LINE_OK = b'OK\n'
+LINE_ERR = b'ERR\n'
+
+###############
+# I/O helpers #
+###############
+
+def recv_line(sock: socket.socket, max_len: int = MAX_FILENAME_LEN) -> bytes:
+    """Receive a single line terminated by '\n'.
+    Returns the line including everything before '\n' (without '\n').
+    Raises a ValueError if more data than max_len is received.
+    """
+    data = bytearray()
+    while True:
+        chunk = sock.recv(1)
+        if not chunk:
+            raise ConnectionError
+        if chunk == b'\n':
+            break
+        data += chunk
+        if len(data) > max_len:
+            raise ValueError
+    return bytes(data)
+
+##########
+# Server #
+##########
+
+def handle_client(conn: socket.socket, outdir: str) -> None:
+    """Handle a single client:
+    1) Read filepath and sanitise it.
+    2) Check existence of <outdir>/<filename>-received
+    3) Reply LINE_OK/LINE_ERR accordingly
+    4) If LINE_OK, receive length and payload, write file, and send final LINE_OK.
+    On any error, send LINE_ERR and return.
+    """
+    try:
+        raw_line = recv_line(conn)
+        try:
+            filename = raw_line.decode('utf-8')
+        except UnicodeDecodeError:
+            conn.sendall(LINE_ERR)
+            return
+
+        filename = os.path.basename(filename)
+        if filename == '':
+            conn.sendall(LINE_ERR)
+            return
+
+        os.makedirs(outdir, exist_ok=True)
+        dest_path = os.path.join(outdir, f"{filename}-received")
+
+        if os.path.exists(dest_path):
+            conn.sendall(LINE_ERR)
+            return
+        else:
+            conn.sendall(LINE_OK)
+
+        hdr = bytearray()
+        while len(hdr) < 8:
+            chunk = conn.recv(8 - len(hdr))
+            if not chunk:
+                raise ConnectionError
+            hdr += chunk
+
+        (file_size,) = struct.unpack('!Q', hdr)
+
+        remaining = file_size
+        try:
+            with open(dest_path, 'wb') as f:
+                while remaining > 0:
+                    chunk = conn.recv(min(BUFSIZE, remaining))
+                    if not chunk:
+                        raise ConnectionError
+                    f.write(chunk)
+                    remaining -= len(chunk)
+                f.flush()
+        except Exception:
+            try:
+                if os.path.exists(dest_path):
+                    os.remove(dest_path)
+            except Exception:
+                pass
+            raise
+
+        conn.sendall(LINE_OK)
+
+    except Exception:
+        try:
+            conn.sendall(LINE_ERR)
+        except Exception:
+            pass
+        return
+
+
+def run_server(port: int, outdir: str, ipv6: bool) -> None:
+    """Start the TCP file transfer server."""
+    family = socket.AF_INET6 if ipv6 else socket.AF_INET
+    bind_addr = '::' if ipv6 else '0.0.0.0'
+
+    with socket.socket(family, socket.SOCK_STREAM) as s:
+        s.bind((bind_addr, port))
+        s.listen(1)
+        while True:
+            conn, _ = s.accept()
+            with conn:
+                handle_client(conn, outdir)
+
+
+##########
+# Client #
+##########
+
+def run_client(server_ip: str, port: int, file_path: str, ipv6: bool) -> int:
+    """Establish connection to server and send the specified file."""
+    if not os.path.isfile(file_path):
+        print(f"Not a file: {file_path}", file=sys.stderr)
+        return 2
+    filename = os.path.basename(file_path)
+    file_size = os.path.getsize(file_path)
+
+    family = socket.AF_INET6 if ipv6 else socket.AF_INET
+    addr = (server_ip, port, 0, 0) if ipv6 else (server_ip, port)
+
+    try:
+        with socket.socket(family, socket.SOCK_STREAM) as s:
+            s.connect(addr)
+
+            s.sendall(filename.encode('utf-8') + b'\n')
+
+            response = recv_line(s)
+            if response + b'\n' != LINE_OK:
+                return 1
+
+            s.sendall(struct.pack('!Q', file_size))
+
+            with open(file_path, 'rb') as f:
+                while True:
+                    chunk = f.read(BUFSIZE)
+                    if not chunk:
+                        break
+                    s.sendall(chunk)
+
+            final = recv_line(s)
+            if final + b'\n' == LINE_OK:
+                return 0
+            return 255
+
+    except Exception:
+        return 255
+
+
+################
+# Main program #
+################
+
+def parse_args(argv=None) -> argparse.Namespace:
+    """Parse command-line arguments."""
+    p = argparse.ArgumentParser(description='TCP file transfer (client/server)')
+    mode = p.add_mutually_exclusive_group()
+    mode.add_argument('--server', action='store_true', help='Run in server mode')
+    mode.add_argument('--client', action='store_true', help='Run in client mode (default)')
+
+    p.add_argument('--port', type=int, default=DEFAULT_PORT, help='TCP port (default: 9090)')
+    p.add_argument('--outdir', default=DEFAULT_OUTDIR, help='Server: output directory (default: ./)')
+    p.add_argument('--connect', dest='server_ip', default=None,
+                   help='Client: server IPv4/IPv6 address (default: 127.0.0.1 or ::1 with --ipv6).')
+    p.add_argument('--file', dest='file_path', help='Client: path to the file to send (no default).')
+    p.add_argument('--ipv6', action='store_true', help='Use IPv6 sockets.')
+    return p.parse_args(argv)
+
+def main(argv=None) -> int:
+    """Main program entry point."""
+
+    args = parse_args(argv)
+
+    if args.server:
+        outdir = args.outdir
+        run_server(args.port, outdir, ipv6=args.ipv6)
+        return 0
+
+    server_ip = args.server_ip
+    if server_ip is None:
+        server_ip = DEFAULT_IPV6_ADDRESS if args.ipv6 else DEFAULT_IPV4_ADDRESS
+
+    if not args.file_path:
+        print('Client mode requires --file <path>', file=sys.stderr)
+        return 2
+
+    rc = run_client(server_ip, args.port, args.file_path, ipv6=args.ipv6)
+    return rc
+
+if __name__ == '__main__':
+    sys.exit(main())
