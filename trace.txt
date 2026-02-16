@@ -1,0 +1,5 @@
+dig @198.41.0.4 www.whatsapp.com +norecurse
+dig @192.5.6.30 www.whatsapp.com +norecurse
+dig @198.41.0.4 a.ns.whatsapp.net +norecurse
+dig @192.55.83.30 a.ns.whatsapp.net +norecurse
+dig @129.134.30.12 www.whatsapp.com +norecurse
